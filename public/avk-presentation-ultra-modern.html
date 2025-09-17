@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accompagnement AVK - Présentation Ultra Moderne</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            overflow: hidden;
+            height: 100vh;
+            position: relative;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated background particles */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 107, 107, 0.3);
+            border-radius: 50%;
+            animation: float-up 15s infinite linear;
+        }
+
+        .particle:nth-child(even) {
+            background: rgba(254, 202, 87, 0.3);
+            animation-duration: 20s;
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        /* Animated background waves */
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.2' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,133.3C960,128,1056,96,1152,90.7C1248,85,1344,107,1392,117.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E") no-repeat;
+            background-size: cover;
+            animation: wave 10s linear infinite;
+        }
+
+        @keyframes wave {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-1440px); }
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.4);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b 0%, #ee5a24 50%, #feca57 100%);
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 25px rgba(238, 90, 36, 0.6);
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 100px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8));
+            animation: shine 2.5s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100px); }
+            100% { transform: translateX(100px); }
+        }
+
+        /* Main Content Area */
+        .slide-content {
+            flex: 1;
+            padding: 3rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            animation: slideIn 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            z-index: 10;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.9) rotateX(10deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1) rotateX(0);
+            }
+        }
+
+        /* Title Slide */
+        .title-slide {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .icon-container {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 50%, #feca57 100%);
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 3rem;
+            box-shadow: 0 30px 80px rgba(238, 90, 36, 0.5);
+            animation: heartbeat 2s infinite;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .icon-container::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 50%, #feca57 100%);
+            border-radius: 40px;
+            filter: blur(25px);
+            opacity: 0.7;
+            z-index: -1;
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1) rotateZ(0deg);
+            }
+            25% {
+                transform: scale(1.05) rotateZ(1deg);
+            }
+            50% {
+                transform: scale(1.1) rotateZ(-1deg);
+            }
+            75% {
+                transform: scale(1.05) rotateZ(1deg);
+            }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.1);
+            }
+        }
+
+        .icon-container svg {
+            width: 80px;
+            height: 80px;
+            color: white;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+        }
+
+        h1 {
+            font-size: 4.2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 50%, #feca57 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.2rem;
+            letter-spacing: -0.03em;
+            text-shadow: 0 10px 30px rgba(238, 90, 36, 0.2);
+        }
+
+        .subtitle {
+            font-size: 2.1rem;
+            color: #5f6368;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+        }
+
+        h2 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            color: #2d3436;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 100px;
+            height: 6px;
+            background: linear-gradient(90deg, #ff6b6b 0%, #feca57 100%);
+            border-radius: 3px;
+            animation: expand 1s ease-out;
+        }
+
+        @keyframes expand {
+            from { width: 0; opacity: 0; }
+            to { width: 100px; opacity: 1; }
+        }
+
+        /* Modern Glass Cards */
+        .card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+            backdrop-filter: blur(20px);
+            border-radius: 28px;
+            padding: 2.2rem;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08), 
+                        inset 0 2px 4px rgba(255, 255, 255, 0.9),
+                        0 0 0 1px rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.8rem;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 35px 70px rgba(238, 90, 36, 0.15);
+        }
+
+        /* Info Cards Grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.9) 100%);
+            backdrop-filter: blur(30px);
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.06);
+            border: 2px solid rgba(255, 107, 107, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 107, 107, 0.1) 0%, transparent 70%);
+            transform: scale(0);
+            transition: transform 0.5s;
+        }
+
+        .info-card:hover::after {
+            transform: scale(1);
+        }
+
+        .info-card:hover {
+            transform: translateY(-10px) rotate(-1deg);
+            box-shadow: 0 25px 60px rgba(255, 107, 107, 0.12);
+            border-color: rgba(255, 107, 107, 0.3);
+        }
+
+        /* Steps Timeline */
+        .steps-container {
+            position: relative;
+            padding-left: 4rem;
+        }
+
+        .steps-container::before {
+            content: '';
+            position: absolute;
+            left: 2rem;
+            top: 3rem;
+            bottom: 3rem;
+            width: 4px;
+            background: linear-gradient(180deg, #ff6b6b 0%, #feca57 100%);
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .step-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+            animation: slideFromLeft 0.6s ease backwards;
+        }
+
+        .step-item:nth-child(1) { animation-delay: 0.1s; }
+        .step-item:nth-child(2) { animation-delay: 0.2s; }
+        .step-item:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes slideFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+        }
+
+        .step-number {
+            position: absolute;
+            left: -4rem;
+            width: 4rem;
+            height: 4rem;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.4rem;
+            box-shadow: 0 15px 35px rgba(255, 107, 107, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 15px 35px rgba(255, 107, 107, 0.4); }
+            50% { transform: scale(1.1); box-shadow: 0 20px 45px rgba(255, 107, 107, 0.5); }
+        }
+
+        .step-content {
+            background: white;
+            border-radius: 20px;
+            padding: 1.8rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .step-content:hover {
+            transform: translateX(10px);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.1);
+        }
+
+        .step-content h3 {
+            font-size: 1.4rem;
+            color: #2d3436;
+            margin-bottom: 0.6rem;
+            font-weight: 700;
+        }
+
+        .step-content p {
+            color: #5f6368;
+            line-height: 1.8;
+        }
+
+        /* Module Cards */
+        .module-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .module-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: 0 20px 40px rgba(255, 107, 107, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        .conseil-box {
+            background: linear-gradient(135deg, #c7ecee 0%, #81ecec 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 1.8rem;
+            border-left: 6px solid #00b894;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .conseil-box::before {
+            content: '✨';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            font-size: 100px;
+            opacity: 0.15;
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .conseil-box h4 {
+            color: #00856a;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            font-size: 1.2rem;
+        }
+
+        .conseil-box p {
+            color: #00695c;
+            line-height: 1.7;
+        }
+
+        /* Callouts */
+        .callout {
+            padding: 2rem;
+            border-radius: 24px;
+            margin-bottom: 1.5rem;
+            border-left: 8px solid;
+            background: white;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .callout::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+
+        .callout-danger {
+            border-color: #ee5a24;
+            background: linear-gradient(135deg, #fab1a0 0%, #ff7675 100%);
+        }
+
+        .callout-danger::before {
+            background: #ee5a24;
+        }
+
+        .callout-danger h3 {
+            color: #c0392b;
+        }
+
+        .callout-warning {
+            border-color: #fdcb6e;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+        }
+
+        .callout-warning::before {
+            background: #fdcb6e;
+        }
+
+        .callout-warning h3 {
+            color: #f39c12;
+        }
+
+        .callout-info {
+            border-color: #74b9ff;
+            background: linear-gradient(135deg, #a29bfe 0%, #74b9ff 100%);
+        }
+
+        .callout-info::before {
+            background: #74b9ff;
+        }
+
+        .callout-info h3 {
+            color: #2980b9;
+        }
+
+        .callout:hover {
+            transform: translateX(12px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12);
+        }
+
+        /* INR Chart */
+        .inr-chart {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+        }
+
+        .inr-zones {
+            display: flex;
+            height: 200px;
+            margin: 2rem 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .inr-zone {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .inr-zone:hover {
+            flex: 1.5;
+            z-index: 10;
+        }
+
+        .zone-low {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+        }
+
+        .zone-target {
+            background: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
+        }
+
+        .zone-high {
+            background: linear-gradient(135deg, #ff7675 0%, #d63031 100%);
+        }
+
+        /* Pie Chart */
+        .pie-chart {
+            width: 350px;
+            height: 350px;
+            margin: 2rem auto;
+            position: relative;
+        }
+
+        .pie-chart svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.1));
+        }
+
+        .pie-chart-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .pie-chart-center .value {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #2d3436;
+        }
+
+        .pie-chart-center .label {
+            font-size: 1rem;
+            color: #5f6368;
+        }
+
+        .pie-chart-legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.5rem 1rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .legend-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .legend-color {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Table */
+        .table-container {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        th {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            padding: 1.3rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 0.02em;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        th:first-child {
+            border-top-left-radius: 16px;
+        }
+
+        th:last-child {
+            border-top-right-radius: 16px;
+        }
+
+        td {
+            padding: 1.3rem;
+            border-bottom: 1px solid #ecf0f1;
+            color: #2d3436;
+            transition: all 0.2s ease;
+        }
+
+        tr:hover td {
+            background: linear-gradient(90deg, rgba(255, 107, 107, 0.05) 0%, rgba(254, 202, 87, 0.05) 100%);
+            transform: scale(1.01);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:last-child td:first-child {
+            border-bottom-left-radius: 16px;
+        }
+
+        tr:last-child td:last-child {
+            border-bottom-right-radius: 16px;
+        }
+
+        /* Cases */
+        .case-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.9) 100%);
+            border-radius: 24px;
+            padding: 2.2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid;
+            border-image: linear-gradient(180deg, #ff6b6b 0%, #feca57 100%) 1;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .case-card:hover {
+            transform: translateX(15px) rotate(1deg);
+            box-shadow: 0 25px 60px rgba(255, 107, 107, 0.12);
+        }
+
+        .case-card h3 {
+            color: #2d3436;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .case-card p {
+            color: #5f6368;
+            line-height: 1.8;
+        }
+
+        /* Bullets */
+        .bullets {
+            list-style: none;
+            padding: 0;
+        }
+
+        .bullets li {
+            padding: 1.3rem 0;
+            padding-left: 3rem;
+            position: relative;
+            color: #2d3436;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            animation: fadeInUp 0.5s ease backwards;
+        }
+
+        .bullets li:nth-child(1) { animation-delay: 0.1s; }
+        .bullets li:nth-child(2) { animation-delay: 0.2s; }
+        .bullets li:nth-child(3) { animation-delay: 0.3s; }
+        .bullets li:nth-child(4) { animation-delay: 0.4s; }
+        .bullets li:nth-child(5) { animation-delay: 0.5s; }
+        .bullets li:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .bullets li::before {
+            content: '💉';
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* Messages Cards */
+        .messages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .message-card {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 20px 50px rgba(238, 90, 36, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+
+        .message-card::before {
+            content: '❝';
+            position: absolute;
+            top: -30px;
+            right: 10px;
+            font-size: 150px;
+            opacity: 0.1;
+            font-family: Georgia, serif;
+        }
+
+        .message-card:hover {
+            transform: translateY(-15px) rotateX(5deg) rotateY(-5deg);
+            box-shadow: 0 30px 70px rgba(238, 90, 36, 0.4);
+        }
+
+        .message-card p {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Summary Points */
+        .summary-points {
+            max-width: 1100px;
+            margin: 2.5rem auto;
+        }
+
+        .summary-point {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.9) 100%);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 2.2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            border-left: 6px solid;
+            border-image: linear-gradient(180deg, #ff6b6b 0%, #feca57 100%) 1;
+            color: #2d3436;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .summary-point::after {
+            content: '✓';
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            opacity: 0.1;
+            color: #ff6b6b;
+        }
+
+        .summary-point:hover {
+            transform: translateX(15px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(255, 107, 107, 0.12);
+        }
+
+        /* Footer */
+        .footer {
+            height: 90px;
+            padding: 0 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.05);
+            position: relative;
+            z-index: 20;
+        }
+
+        .footer-left {
+            color: #5f6368;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .footer-center {
+            font-weight: 800;
+            color: #2d3436;
+            font-size: 1.2rem;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            box-shadow: 0 12px 30px rgba(238, 90, 36, 0.3);
+            position: relative;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            border-radius: 50%;
+            filter: blur(20px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-btn:hover:not(:disabled)::before {
+            opacity: 0.6;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            transform: scale(1.2) rotate(5deg);
+            box-shadow: 0 20px 45px rgba(238, 90, 36, 0.4);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .nav-btn svg {
+            width: 26px;
+            height: 26px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Watermark */
+        .watermark {
+            position: absolute;
+            top: 1.2rem;
+            right: 2rem;
+            font-size: 0.8rem;
+            color: rgba(0, 0, 0, 0.35);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.8rem; }
+            h2 { font-size: 2.2rem; }
+            .slide-content { padding: 2rem 1.5rem; }
+            .info-grid { grid-template-columns: 1fr; }
+            .messages-grid { grid-template-columns: 1fr; }
+            .pie-chart { width: 280px; height: 280px; }
+            .inr-zones { flex-direction: column; height: auto; }
+            .inr-zone { padding: 2rem; }
+            .inr-zone:hover { flex: 1; }
+        }
+
+        /* Hide elements */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Animated particles -->
+        <div class="particles" id="particles"></div>
+        
+        <!-- Animated wave -->
+        <div class="wave"></div>
+
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar" style="width: 5.88%"></div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="slide-content" id="slideContent">
+            <!-- Content will be inserted here -->
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-left">© Contenu réalisé par le Docteur Dan Amzallag.</div>
+            <div class="footer-center">
+                <span id="slideNumber">1</span> / <span id="totalSlides">17</span>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)" disabled>
+                    <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="3">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                </button>
+                <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">
+                    <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="3">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Watermark -->
+        <div class="watermark">AVK • Formation • Officine</div>
+    </div>
+
+    <script>
+        // Create animated particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        const slides = [
+            {
+                id: 'titre',
+                type: 'title',
+                title: 'Accompagnement des patients sous AVK',
+                subtitle: 'Warfarine, acénocoumarol — Officine'
+            },
+            {
+                id: 'objectifs',
+                type: 'bullets',
+                title: 'Objectifs pédagogiques',
+                bullets: [
+                    'Repérer les patients éligibles et engager l\'adhésion',
+                    'Expliquer l\'INR et sécuriser l\'autosurveillance/carnet AVK',
+                    'Stabiliser le régime en vitamine K et prévenir les interactions',
+                    'Conduire l\'entretien (pas à pas) et construire un plan individuel',
+                    'Gérer les situations à risque (INR haut/bas, chirurgie)',
+                    'Tracer/coordonner (DP/DMP, MSS) et facturer TAC/ASI/ASS'
+                ]
+            },
+            {
+                id: 'eligibilite',
+                type: 'info',
+                title: 'Éligibilité & repérage officinal',
+                items: [
+                    'Patient sous AVK (warfarine, acénocoumarol) avec suivi au long cours (FA, MTEV, valves, SAPL…)',
+                    'Repérage : délivrances AVK récurrentes ; INR instable ; retour d\'hospitalisation ; demande de conseil',
+                    'Adhésion volontaire : bulletin signé ; officine référente unique pour la facturation'
+                ],
+                tip: 'Paramétrer des alertes DP/logiciel sur délivrances AVK et INR hors cible rapportés par le patient.'
+            },
+            {
+                id: 'inr-zones',
+                type: 'inr',
+                title: 'Zones INR — Comprendre les risques',
+                zones: [
+                    { name: 'INR < 2', label: 'Zone à risque thrombotique', color: 'zone-low' },
+                    { name: 'INR 2-3', label: 'Zone thérapeutique cible', color: 'zone-target' },
+                    { name: 'INR > 3', label: 'Zone à risque hémorragique', color: 'zone-high' }
+                ]
+            },
+            {
+                id: 'inr-messages',
+                type: 'cards',
+                title: 'INR — messages clés au patient',
+                cards: [
+                    'INR = indicateur de fluidité du sang ; cible générale souvent 2–3 (selon indication)',
+                    'Ne jamais modifier la dose seul : AVK = dose variable, ajustée au résultat INR',
+                    'Tenir à jour le carnet AVK (doses / dates / résultats / contacts) + carte anticoagulant',
+                    'EN CAS D\'URGENCE : montrer la carte anticoagulant'
+                ]
+            },
+            {
+                id: 'deroule',
+                type: 'steps',
+                title: 'Déroulé de l\'entretien (année 1)',
+                steps: [
+                    { title: 'Entretien 1 — Évaluation', text: 'Historique, indication, résultats INR récents, observance, alimentation habituelle, alcool, interactions/polymédication.' },
+                    { title: 'Entretien 2 — Module prioritaire', text: 'Régime vit K & interactions OU observance & carnet AVK (selon besoins principaux).' },
+                    { title: 'Entretien 3 — 2e module + bilan', text: 'Consolider les messages, plan écrit (signes d\'alerte, conduite, dates de contrôle), coordination MT.' }
+                ],
+                note: 'Années suivantes : 2 entretiens de suivi (ASS) centrés sur INR, événements, chirurgies prévues.'
+            },
+            {
+                id: 'aliments-vitk',
+                type: 'pie',
+                title: 'Aliments riches en vitamine K',
+                data: [
+                    { name: 'Légumes verts', value: 45, color: '#00b894' },
+                    { name: 'Huiles végétales', value: 25, color: '#fdcb6e' },
+                    { name: 'Foie/abats', value: 20, color: '#e17055' },
+                    { name: 'Autres', value: 10, color: '#74b9ff' }
+                ]
+            },
+            {
+                id: 'module-regime',
+                type: 'module',
+                icon: '🥗',
+                title: 'Module — Vitamine K & alimentation',
+                points: [
+                    'Régime STABLE : ni excès ni carence — éviter les « cures détox » vertes ponctuelles',
+                    'Lister aliments riches en vit K (chou, épinards, brocoli, persil, foie, certaines huiles)',
+                    'Alcool : modération ; éviter les ivresses → variation INR',
+                    'Adapter le discours : « gardez vos habitudes, notez tout changement notable »'
+                ],
+                conseil: 'Expliquer que c\'est la VARIATION rapide d\'apport en vit K qui déstabilise l\'INR.'
+            },
+            {
+                id: 'module-interactions',
+                type: 'module',
+                icon: '💊',
+                title: 'Module — Interactions & automédication',
+                points: [
+                    'Médicaments : antibiotiques/antifongiques, amiodarone, AINS, antalgie sans avis = risque',
+                    'Phytothérapie/compléments : millepertuis, ginkgo, ginseng… prudence',
+                    'Toujours demander conseil avant tout nouveau traitement ou complément'
+                ],
+                conseil: 'Vérifier systématiquement la co-prescription et l\'alcool ; proposer alternatives sans AINS.'
+            },
+            {
+                id: 'module-observance',
+                type: 'module',
+                icon: '🗓️',
+                title: 'Module — Observance & carnet AVK',
+                points: [
+                    'Remplir le carnet AVK (doses / INR / RDV labo), apporter l\'outil à chaque passage',
+                    'Jours/doses variables : utiliser piluliers, alarmes ; bannir l\'auto-ajustement',
+                    'Signes d\'alerte à connaître : saignements inhabituels, hématomes, hématurie, épistaxis prolongée'
+                ],
+                conseil: 'Une personne aidante peut relire le carnet avec le patient si nécessaire.'
+            },
+            {
+                id: 'situations',
+                type: 'callouts',
+                title: 'Situations à risque — conduites à tenir',
+                callouts: [
+                    { level: 'danger', title: 'INR haut', text: 'Suspendre l\'AVK ; avis médical ; vitamine K possible selon protocole médical ; surveiller signes hémorragiques.' },
+                    { level: 'warn', title: 'INR bas', text: 'Ne pas doubler seul ; avis médical pour ajustement ; vérifier prises/interaction récente.' },
+                    { level: 'info', title: 'Avant chirurgie/acte invasif', text: 'Anticiper : arrêt AVK selon protocole et relais HBPM si indiqué ; le pharmacien s\'assure du plan.' }
+                ]
+            },
+            {
+                id: 'vie-quotidienne',
+                type: 'bullets',
+                title: 'Vie quotidienne — conseils pratiques',
+                bullets: [
+                    'Rasage électrique, brosse à dents souple ; éviter sports de contact',
+                    'Limiter alcool ; prévenir en cas d\'oubli ou de vomissements (ne pas compenser à l\'aveugle)',
+                    'Toujours porter la carte anticoagulant'
+                ]
+            },
+            {
+                id: 'cas-pratiques',
+                type: 'cases',
+                title: 'Mini-cas pratiques (extraits corpus)',
+                cases: [
+                    {
+                        title: 'INR en yo-yo ← régime yo-yo',
+                        story: 'Mme G., FA sous warfarine : cures « jus verts » 1 semaine/mois → INR instable. Solution : expliquer vit K, stabiliser l\'alimentation ; INR revient dans la cible.'
+                    },
+                    {
+                        title: 'Patient confus — sécurisation à domicile',
+                        story: 'Mr P., 80 ans, erreurs répétées. Coordination MT/SSIAD : semainier AVK préparé par IDE + relais officine → plus d\'erreurs.'
+                    },
+                    {
+                        title: 'Chirurgie mal anticipée',
+                        story: 'Mme D., SAPL : pensait arrêter la veille. Vérification officine → arrêt 5 j + relais HBPM planifié avec MT/CH ; opération sans incident.'
+                    }
+                ]
+            },
+            {
+                id: 'facturation',
+                type: 'table',
+                title: 'Facturation — codes & règles',
+                table: [
+                    { code: 'TAC', libelle: 'Adhésion (traceur)', montant: '0,01 €', prise: 'AMO 100%', note: 'À l\'adhésion, unique' },
+                    { code: 'ASI', libelle: 'Année 1 — 3 entretiens', montant: '15 € + 15 € + 20 €', prise: 'AMO 70%', note: 'Éval + module + bilan' },
+                    { code: 'ASS', libelle: 'Années suivantes — 2 entretiens', montant: '10 € + 20 €', prise: 'AMO 70%', note: 'Suivi annuel' }
+                ],
+                notes: [
+                    'Acte isolé : non cumulable le même jour sur le même flux',
+                    'Tiers payant ; indiquer RPPS pharmacien ; respecter fréquence (Année 1 = 3, Années suivantes = 2)'
+                ]
+            },
+            {
+                id: 'messages',
+                type: 'messages',
+                title: 'Messages clés au comptoir',
+                cards: [
+                    '« Ne changez jamais la dose seul : appelez d\'abord. »',
+                    '« Régime stable : évitez les cures "détox". »',
+                    '« Carte anticoagulant toujours sur vous. »',
+                    '« Dites-nous tout nouveau médicament ou complément. »'
+                ]
+            },
+            {
+                id: 'synthese',
+                type: 'summary',
+                title: 'À retenir',
+                points: [
+                    'INR expliqué et suivi = coeur de l\'accompagnement',
+                    'Deux modules phares : alimentation/Interactions + Observance/Carnet',
+                    'Anticiper les actes invasifs (relais HBPM) ; coordonner avec MT',
+                    'Facturer correctement TAC/ASI/ASS ; tracer systématiquement'
+                ]
+            },
+            {
+                id: 'fin',
+                type: 'conclusion',
+                title: 'Accompagnement AVK — prêt à déployer',
+                subtitle: 'Stabiliser l\'INR, prévenir hémorragies et thromboses'
+            }
+        ];
+
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        function renderSlide(slide) {
+            const content = document.getElementById('slideContent');
+            content.innerHTML = '';
+            content.className = 'slide-content';
+
+            switch(slide.type) {
+                case 'title':
+                case 'conclusion':
+                    content.innerHTML = `
+                        <div class="title-slide">
+                            <div class="icon-container">
+                                <svg width="80" height="80" fill="none" stroke="white" stroke-width="2">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                    <path d="M12 8v13M8 12h8"/>
+                                </svg>
+                            </div>
+                            <h1>${slide.title}</h1>
+                            ${slide.subtitle ? `<p class="subtitle">${slide.subtitle}</p>` : ''}
+                        </div>
+                    `;
+                    break;
+
+                case 'bullets':
+                    content.innerHTML = `
+                        <h2>${slide.title}</h2>
+                        <div class="card">
+                            <ul class="bullets">
+                                ${slide.bullets.map(b => `<li>${b}</li>`).join('')}
+                            </ul>
+                        </div>
+                    `;
+                    break;
+
+                case 'info':
+                    content.innerHTML = `
+                        <h2>${slide.title}</h2>
+                        <div class="card">
+                            <ul class="bullets">
+                                ${slide.items.map(item => `<li>${item}</li>`).join('')}
+                            </ul>
+                            ${slide.tip ? `
+                                <div class="conseil-box">
+                                    <h4>💡 Conseil</h4>
+                                    <p>${slide.tip}</p>
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                    break;
+
+                case 'inr':
+                    content.innerHTML = `
+                        <h2>${slide.title}</h2>
+                        <div class="inr-chart">
+                            <div class="inr-zones">
+                                ${slide.zones.map(zone => `
+                                    <div class="inr-zone ${zone.color}">
+                                        <div>
+                                            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">${zone.name}</div>
+                                            <div style="font-size: 0.9rem; opacity: 0.9;">${zone.label}</div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <p style="text-align: center; margin-top: 2rem; color: #5f6368;">
+                                L'objectif est de maintenir l'INR dans la zone thérapeutique pour équilibrer efficacité et sécurité
+                            </p>
+                        </div>
+                    `;
+                    break;
+
+                case 'cards':
+                    content.innerHTML = `
+                        <h2>${slide.title}</h2>
+                        <div class="info-grid">
+                            ${slide.cards.map(card => `
+                                <div class="info-card">
+                                    <p style="font-size: 1.1rem; line-height: 1.8; color: #2d3436;">${card}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                    break;
+
+                case 'steps':
+                    content.innerHTML = `
+                        <h2>${slide.title}</h2>
+                        <div class="steps-container">
+                            ${slide.steps.map((step, i) => `
+                                <div class="step-item">
+                                    <div class="step-number">${i + 1}</div>
+                                    <div class="step-content">
+                                        <h3>${step.title}</h3>
+                                        <p>${step.text}</p>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        ${slide.note ? `<p style="margin-top: 1.5rem; color: #5f6368; font-style: italic;">ℹ️ ${slide.note}</p>` : ''}
+                    `;
+                    break;
+
+                case 'pie':
+                    const total = slide.data.reduce((sum, item) => sum + item.value, 0);
+                    let cumulativePercent = 0;
+                    
+                    content.innerHTML = `
+                        <h2>${slide.title}</h2>
+                        <div class="inr-chart">
+                            <div class="pie-chart">
+                                <svg viewBox="0 0 100 100">
+                                    ${slide.data.map((item, i) => {
+                                        const percent = (item.value / total) * 100;
+                                        const startAngle = (cumulativePercent * 360) / 100;
+                                        const endAngle = ((cumulativePercent + percent) * 360) / 100;
+                                        const largeArcFlag = endAngle - startAngle > 180 ? 1 : 0;
+                                        
+                                        const startX = 50 + 45 * Math.cos((startAngle * Math.PI) / 180);
+                                        const startY = 50 + 45 * Math.sin((startAngle * Math.PI) / 180);
+                                        const endX = 50 + 45 * Math.cos((endAngle * Math.PI) / 180);
+                                        const endY = 50 + 45 * Math.sin((endAngle * Math.PI) / 180);
+                                        
+                                        const path = `M 50 50 L ${startX} ${startY} A 45 45 0 ${largeArcFlag} 1 ${endX} ${endY} Z`;
+                                        
+                                        cumulativePercent += percent;
+                                        
+                                        return `
+                                            <path d="${path}" fill="${item.color}" stroke="white" stroke-width="2" 
+                                                  opacity="0.9" style="transition: all 0.3s ease; cursor: pointer;"
+                                                  onmouseover="this.style.opacity='1'; this.style.transform='scale(1.05)'"
+                                                  onmouseout="this.style.opacity='0.9'; this.style.transform='scale(1)'"/>
+                                        `;
+                                    }).join('')}
+                                    <circle cx="50" cy="50" r="25" fill="white"/>
+                                </svg>
+                                <div class="pie-chart-center">
+                                    <div class="value">${total}%</div>
+                                    <div class="label">Répartition</div>
+                                </div>
+                            </div>
+                            <div class="pie-chart-legend">
+                                ${slide.data.map(item => `
+                                    <div class="legend-item">
+                                        <div class="legend-color" style="background: ${item.color};"></div>
+                                        <span><strong>${item.name}</strong> (${item.value}%)</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 'module':
+                    content.innerHTML = `
+                        <div class="module-header">
+                            <div class="module-icon">${slide.icon}</div>
+                            <h2>${slide.title}</h2>
+                        </div>
+                        <div class="card">
+                            <ul class="bullets">
+                                ${slide.points.map(p => `<li>${p}</li>`).join('')}
+                            </ul>
+                            ${slide.conseil ? `
+                                <div class="conseil-box">
+                                    <h4>Conseil pratique</h4>
+                                    <p>${slide.conseil}</p>
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                    break;
+
+                case 'callouts':
+                    content.innerHTML = `
+                        <h2>${slide.title}</h2>
+                        ${slide.callouts.map(c => `
+                            <div class="callout callout-${c.level}">
+                                <h3>${c.title}</h3>
+                                <p>${c.text}</p>
+                            </div>
+                        `).join('')}
+                    `;
+                    break;
+
+                case 'cases':
+                    content.innerHTML = `
+                        <h2>${slide.title}</h2>
+                        ${slide.cases.map(c => `
+                            <div class="case-card">
+                                <h3>${c.title}</h3>
+                                <p>${c.story}</p>
+                            </div>
+                        `).join('')}
+                    `;
+                    break;
+
+                case 'table':
+                    content.innerHTML = `
+                        <h2>${slide.title}</h2>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Code</th>
+                                        <th>Libellé</th>
+                                        <th>Montant</th>
+                                        <th>Prise en charge</th>
+                                        <th>Note</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${slide.table.map(row => `
+                                        <tr>
+                                            <td><strong style="color: #ff6b6b;">${row.code}</strong></td>
+                                            <td>${row.libelle}</td>
+                                            <td>${row.montant}</td>
+                                            <td>${row.prise}</td>
+                                            <td style="font-size: 0.9rem; color: #5f6368;">${row.note}</td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                        ${slide.notes ? `
+                            <div class="card" style="margin-top: 1.5rem;">
+                                <ul style="list-style: disc; padding-left: 1.5rem; color: #5f6368;">
+                                    ${slide.notes.map(n => `<li>${n}</li>`).join('')}
+                                </ul>
+                            </div>
+                        ` : ''}
+                    `;
+                    break;
+
+                case 'messages':
+                    content.innerHTML = `
+                        <h2>${slide.title}</h2>
+                        <div class="messages-grid">
+                            ${slide.cards.map(card => `
+                                <div class="message-card">
+                                    <p>${card}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                    break;
+
+                case 'summary':
+                    content.innerHTML = `
+                        <div class="title-slide">
+                            <div class="icon-container">
+                                <svg width="80" height="80" fill="none" stroke="white" stroke-width="3">
+                                    <path d="M9 11l3 3L22 4"/>
+                                    <circle cx="12" cy="12" r="10"/>
+                                </svg>
+                            </div>
+                            <h1>${slide.title}</h1>
+                            <div class="summary-points">
+                                ${slide.points.map(p => `
+                                    <div class="summary-point">${p}</div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                    break;
+            }
+        }
+
+        function updateProgress() {
+            const progress = ((currentSlide + 1) / totalSlides) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('slideNumber').textContent = currentSlide + 1;
+        }
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            
+            if (currentSlide < 0) currentSlide = 0;
+            if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+            
+            renderSlide(slides[currentSlide]);
+            updateProgress();
+            
+            // Update navigation buttons
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') changeSlide(1);
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+        });
+
+        // Touch/swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) changeSlide(1);
+            if (touchEndX > touchStartX + 50) changeSlide(-1);
+        }
+
+        // Initialize
+        document.getElementById('totalSlides').textContent = totalSlides;
+        renderSlide(slides[0]);
+        updateProgress();
+    </script>
+</body>
+</html>

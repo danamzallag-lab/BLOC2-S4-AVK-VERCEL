@@ -1,0 +1,11 @@
+{
+  "name": "bloc2-s4-avk-vercel",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Déploiement Vercel - BLOC2 S4 AVK (HTML statique)",
+  "scripts": {
+    "dev": "vercel dev --yes",
+    "build": "echo \"Static project—no build step\"",
+    "start": "npx http-server public -p 3000 -c-1"
+  }
+}
