@@ -130,6 +130,25 @@
             animation: slideIn 0.8s cubic-bezier(0.23, 1, 0.32, 1);
             position: relative;
             z-index: 10;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 107, 107, 0.2) transparent;
+        }
+
+        .slide-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .slide-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .slide-content::-webkit-scrollbar-thumb {
+            background: rgba(255, 107, 107, 0.2);
+            border-radius: 3px;
+        }
+
+        .slide-content::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 107, 107, 0.3);
         }
 
         @keyframes slideIn {
@@ -520,16 +539,16 @@
             color: #c0392b;
         }
 
-        .callout-warning {
+        .callout-warn {
             border-color: #fdcb6e;
             background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
         }
 
-        .callout-warning::before {
+        .callout-warn::before {
             background: #fdcb6e;
         }
 
-        .callout-warning h3 {
+        .callout-warn h3 {
             color: #f39c12;
         }
 
@@ -774,6 +793,7 @@
         .bullets li:nth-child(4) { animation-delay: 0.4s; }
         .bullets li:nth-child(5) { animation-delay: 0.5s; }
         .bullets li:nth-child(6) { animation-delay: 0.6s; }
+        .bullets li:nth-child(7) { animation-delay: 0.7s; }
 
         @keyframes fadeInUp {
             from {
@@ -787,7 +807,7 @@
         }
 
         .bullets li::before {
-            content: '💉';
+            content: '👉';
             position: absolute;
             left: 0;
             font-size: 1.5rem;
@@ -821,7 +841,7 @@
         }
 
         .message-card::before {
-            content: '❝';
+            content: '"';
             position: absolute;
             top: -30px;
             right: 10px;
@@ -866,7 +886,7 @@
         }
 
         .summary-point::after {
-            content: '✓';
+            content: '✔';
             position: absolute;
             right: 30px;
             top: 50%;
@@ -1002,7 +1022,7 @@
 
         <!-- Progress Bar -->
         <div class="progress-bar">
-            <div class="progress-fill" id="progressBar" style="width: 5.88%"></div>
+            <div class="progress-fill" id="progressBar"></div>
         </div>
 
         <!-- Main Content -->
@@ -1014,15 +1034,15 @@
         <div class="footer">
             <div class="footer-left">© Contenu réalisé par le Docteur Dan Amzallag.</div>
             <div class="footer-center">
-                <span id="slideNumber">1</span> / <span id="totalSlides">17</span>
+                <span id="slideNumber">1</span> / <span id="totalSlides">18</span>
             </div>
             <div class="nav-buttons">
-                <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)" disabled>
+                <button class="nav-btn" id="prevBtn" disabled>
                     <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="3">
                         <path d="M15 18l-6-6 6-6"/>
                     </svg>
                 </button>
-                <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">
+                <button class="nav-btn" id="nextBtn">
                     <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="3">
                         <path d="M9 18l6-6-6-6"/>
                     </svg>
@@ -1031,532 +1051,629 @@
         </div>
 
         <!-- Watermark -->
-        <div class="watermark">AVK • Formation • Officine</div>
+        <div class="watermark">AVK • FORMATION • OFFICINE</div>
     </div>
 
     <script>
-        // Create animated particles
-        const particlesContainer = document.getElementById('particles');
-        for (let i = 0; i < 30; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 15 + 's';
-            particlesContainer.appendChild(particle);
-        }
-
-        const slides = [
-            {
-                id: 'titre',
-                type: 'title',
-                title: 'Accompagnement des patients sous AVK',
-                subtitle: 'Warfarine, acénocoumarol — Officine'
-            },
-            {
-                id: 'objectifs',
-                type: 'bullets',
-                title: 'Objectifs pédagogiques',
-                bullets: [
-                    'Repérer les patients éligibles et engager l\'adhésion',
-                    'Expliquer l\'INR et sécuriser l\'autosurveillance/carnet AVK',
-                    'Stabiliser le régime en vitamine K et prévenir les interactions',
-                    'Conduire l\'entretien (pas à pas) et construire un plan individuel',
-                    'Gérer les situations à risque (INR haut/bas, chirurgie)',
-                    'Tracer/coordonner (DP/DMP, MSS) et facturer TAC/ASI/ASS'
-                ]
-            },
-            {
-                id: 'eligibilite',
-                type: 'info',
-                title: 'Éligibilité & repérage officinal',
-                items: [
-                    'Patient sous AVK (warfarine, acénocoumarol) avec suivi au long cours (FA, MTEV, valves, SAPL…)',
-                    'Repérage : délivrances AVK récurrentes ; INR instable ; retour d\'hospitalisation ; demande de conseil',
-                    'Adhésion volontaire : bulletin signé ; officine référente unique pour la facturation'
-                ],
-                tip: 'Paramétrer des alertes DP/logiciel sur délivrances AVK et INR hors cible rapportés par le patient.'
-            },
-            {
-                id: 'inr-zones',
-                type: 'inr',
-                title: 'Zones INR — Comprendre les risques',
-                zones: [
-                    { name: 'INR < 2', label: 'Zone à risque thrombotique', color: 'zone-low' },
-                    { name: 'INR 2-3', label: 'Zone thérapeutique cible', color: 'zone-target' },
-                    { name: 'INR > 3', label: 'Zone à risque hémorragique', color: 'zone-high' }
-                ]
-            },
-            {
-                id: 'inr-messages',
-                type: 'cards',
-                title: 'INR — messages clés au patient',
-                cards: [
-                    'INR = indicateur de fluidité du sang ; cible générale souvent 2–3 (selon indication)',
-                    'Ne jamais modifier la dose seul : AVK = dose variable, ajustée au résultat INR',
-                    'Tenir à jour le carnet AVK (doses / dates / résultats / contacts) + carte anticoagulant',
-                    'EN CAS D\'URGENCE : montrer la carte anticoagulant'
-                ]
-            },
-            {
-                id: 'deroule',
-                type: 'steps',
-                title: 'Déroulé de l\'entretien (année 1)',
-                steps: [
-                    { title: 'Entretien 1 — Évaluation', text: 'Historique, indication, résultats INR récents, observance, alimentation habituelle, alcool, interactions/polymédication.' },
-                    { title: 'Entretien 2 — Module prioritaire', text: 'Régime vit K & interactions OU observance & carnet AVK (selon besoins principaux).' },
-                    { title: 'Entretien 3 — 2e module + bilan', text: 'Consolider les messages, plan écrit (signes d\'alerte, conduite, dates de contrôle), coordination MT.' }
-                ],
-                note: 'Années suivantes : 2 entretiens de suivi (ASS) centrés sur INR, événements, chirurgies prévues.'
-            },
-            {
-                id: 'aliments-vitk',
-                type: 'pie',
-                title: 'Aliments riches en vitamine K',
-                data: [
-                    { name: 'Légumes verts', value: 45, color: '#00b894' },
-                    { name: 'Huiles végétales', value: 25, color: '#fdcb6e' },
-                    { name: 'Foie/abats', value: 20, color: '#e17055' },
-                    { name: 'Autres', value: 10, color: '#74b9ff' }
-                ]
-            },
-            {
-                id: 'module-regime',
-                type: 'module',
-                icon: '🥗',
-                title: 'Module — Vitamine K & alimentation',
-                points: [
-                    'Régime STABLE : ni excès ni carence — éviter les « cures détox » vertes ponctuelles',
-                    'Lister aliments riches en vit K (chou, épinards, brocoli, persil, foie, certaines huiles)',
-                    'Alcool : modération ; éviter les ivresses → variation INR',
-                    'Adapter le discours : « gardez vos habitudes, notez tout changement notable »'
-                ],
-                conseil: 'Expliquer que c\'est la VARIATION rapide d\'apport en vit K qui déstabilise l\'INR.'
-            },
-            {
-                id: 'module-interactions',
-                type: 'module',
-                icon: '💊',
-                title: 'Module — Interactions & automédication',
-                points: [
-                    'Médicaments : antibiotiques/antifongiques, amiodarone, AINS, antalgie sans avis = risque',
-                    'Phytothérapie/compléments : millepertuis, ginkgo, ginseng… prudence',
-                    'Toujours demander conseil avant tout nouveau traitement ou complément'
-                ],
-                conseil: 'Vérifier systématiquement la co-prescription et l\'alcool ; proposer alternatives sans AINS.'
-            },
-            {
-                id: 'module-observance',
-                type: 'module',
-                icon: '🗓️',
-                title: 'Module — Observance & carnet AVK',
-                points: [
-                    'Remplir le carnet AVK (doses / INR / RDV labo), apporter l\'outil à chaque passage',
-                    'Jours/doses variables : utiliser piluliers, alarmes ; bannir l\'auto-ajustement',
-                    'Signes d\'alerte à connaître : saignements inhabituels, hématomes, hématurie, épistaxis prolongée'
-                ],
-                conseil: 'Une personne aidante peut relire le carnet avec le patient si nécessaire.'
-            },
-            {
-                id: 'situations',
-                type: 'callouts',
-                title: 'Situations à risque — conduites à tenir',
-                callouts: [
-                    { level: 'danger', title: 'INR haut', text: 'Suspendre l\'AVK ; avis médical ; vitamine K possible selon protocole médical ; surveiller signes hémorragiques.' },
-                    { level: 'warn', title: 'INR bas', text: 'Ne pas doubler seul ; avis médical pour ajustement ; vérifier prises/interaction récente.' },
-                    { level: 'info', title: 'Avant chirurgie/acte invasif', text: 'Anticiper : arrêt AVK selon protocole et relais HBPM si indiqué ; le pharmacien s\'assure du plan.' }
-                ]
-            },
-            {
-                id: 'vie-quotidienne',
-                type: 'bullets',
-                title: 'Vie quotidienne — conseils pratiques',
-                bullets: [
-                    'Rasage électrique, brosse à dents souple ; éviter sports de contact',
-                    'Limiter alcool ; prévenir en cas d\'oubli ou de vomissements (ne pas compenser à l\'aveugle)',
-                    'Toujours porter la carte anticoagulant'
-                ]
-            },
-            {
-                id: 'cas-pratiques',
-                type: 'cases',
-                title: 'Mini-cas pratiques (extraits corpus)',
-                cases: [
-                    {
-                        title: 'INR en yo-yo ← régime yo-yo',
-                        story: 'Mme G., FA sous warfarine : cures « jus verts » 1 semaine/mois → INR instable. Solution : expliquer vit K, stabiliser l\'alimentation ; INR revient dans la cible.'
-                    },
-                    {
-                        title: 'Patient confus — sécurisation à domicile',
-                        story: 'Mr P., 80 ans, erreurs répétées. Coordination MT/SSIAD : semainier AVK préparé par IDE + relais officine → plus d\'erreurs.'
-                    },
-                    {
-                        title: 'Chirurgie mal anticipée',
-                        story: 'Mme D., SAPL : pensait arrêter la veille. Vérification officine → arrêt 5 j + relais HBPM planifié avec MT/CH ; opération sans incident.'
-                    }
-                ]
-            },
-            {
-                id: 'facturation',
-                type: 'table',
-                title: 'Facturation — codes & règles',
-                table: [
-                    { code: 'TAC', libelle: 'Adhésion (traceur)', montant: '0,01 €', prise: 'AMO 100%', note: 'À l\'adhésion, unique' },
-                    { code: 'ASI', libelle: 'Année 1 — 3 entretiens', montant: '15 € + 15 € + 20 €', prise: 'AMO 70%', note: 'Éval + module + bilan' },
-                    { code: 'ASS', libelle: 'Années suivantes — 2 entretiens', montant: '10 € + 20 €', prise: 'AMO 70%', note: 'Suivi annuel' }
-                ],
-                notes: [
-                    'Acte isolé : non cumulable le même jour sur le même flux',
-                    'Tiers payant ; indiquer RPPS pharmacien ; respecter fréquence (Année 1 = 3, Années suivantes = 2)'
-                ]
-            },
-            {
-                id: 'messages',
-                type: 'messages',
-                title: 'Messages clés au comptoir',
-                cards: [
-                    '« Ne changez jamais la dose seul : appelez d\'abord. »',
-                    '« Régime stable : évitez les cures "détox". »',
-                    '« Carte anticoagulant toujours sur vous. »',
-                    '« Dites-nous tout nouveau médicament ou complément. »'
-                ]
-            },
-            {
-                id: 'synthese',
-                type: 'summary',
-                title: 'À retenir',
-                points: [
-                    'INR expliqué et suivi = coeur de l\'accompagnement',
-                    'Deux modules phares : alimentation/Interactions + Observance/Carnet',
-                    'Anticiper les actes invasifs (relais HBPM) ; coordonner avec MT',
-                    'Facturer correctement TAC/ASI/ASS ; tracer systématiquement'
-                ]
-            },
-            {
-                id: 'fin',
-                type: 'conclusion',
-                title: 'Accompagnement AVK — prêt à déployer',
-                subtitle: 'Stabiliser l\'INR, prévenir hémorragies et thromboses'
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create animated particles
+            const particlesContainer = document.getElementById('particles');
+            if (particlesContainer) {
+                for (let i = 0; i < 30; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.animationDelay = Math.random() * 15 + 's';
+                    particlesContainer.appendChild(particle);
+                }
             }
-        ];
 
-        let currentSlide = 0;
-        const totalSlides = slides.length;
+            const slides = [
+                {
+                    id: 'titre',
+                    type: 'title',
+                    title: 'Accompagnement des patients sous AVK',
+                    subtitle: 'Warfarine, acénocoumarol, fluindione — Officine'
+                },
+                {
+                    id: 'objectifs',
+                    type: 'bullets',
+                    title: 'Objectifs pédagogiques',
+                    bullets: [
+                        'Repérer les patients éligibles et engager l\'adhésion',
+                        'Expliquer l\'INR et sécuriser l\'autosurveillance/carnet AVK',
+                        'Stabiliser le régime en vitamine K et prévenir les interactions',
+                        'Conduire l\'entretien (pas à pas) et construire un plan individuel',
+                        'Gérer les situations à risque (INR haut/bas, chirurgie)',
+                        'Tracer/coordonner (DP/DMP, MSS) et facturer TAC/ASI/ASS'
+                    ]
+                },
+                {
+                    id: 'eligibilite',
+                    type: 'info',
+                    title: 'Éligibilité & repérage officinal',
+                    items: [
+                        'Patient sous AVK (warfarine, acénocoumarol, fluindione) avec suivi au long cours (FA, MTEV, valves, SAPL…)',
+                        'Repérage : délivrances AVK récurrentes ; INR instable ; retour d\'hospitalisation ; demande de conseil',
+                        'Adhésion volontaire : bulletin signé ; officine référente unique pour la facturation'
+                    ],
+                    tip: 'Paramétrer des alertes DP/logiciel sur délivrances AVK et INR hors cible rapportés par le patient.'
+                },
+                {
+                    id: 'inr-zones',
+                    type: 'inr',
+                    title: 'Zones INR — Comprendre les risques',
+                    zones: [
+                        { name: 'INR < 2', label: 'Zone à risque thrombotique', color: 'zone-low' },
+                        { name: 'INR 2-3', label: 'Zone thérapeutique cible', color: 'zone-target' },
+                        { name: 'INR > 3', label: 'Zone à risque hémorragique', color: 'zone-high' }
+                    ],
+                    additionalInfo: '• Certaines situations : INR cible 3-4,5\n• INR > 4,5 = risque hémorragique ++\n• Contrôle régulier (même labo)\n• Fréquent au début → espacé si stable\n• Minimum 1×/mois\n• Contrôles supplémentaires si changement'
+                },
+                {
+                    id: 'inr-messages',
+                    type: 'cards',
+                    title: 'INR — messages clés au patient',
+                    cards: [
+                        'INR = indicateur de fluidité du sang ; cible générale souvent 2—3 (selon indication)',
+                        'Ne jamais modifier la dose seul : AVK = dose variable, ajustée au résultat INR',
+                        'Tenir à jour le carnet AVK (doses / dates / résultats / contacts) + carte anticoagulant',
+                        'EN CAS D\'URGENCE : montrer la carte anticoagulant'
+                    ]
+                },
+                {
+                    id: 'effets-traitement',
+                    type: 'callouts-visual',
+                    title: 'Effets du traitement',
+                    callouts: [
+                        { 
+                            level: 'danger', 
+                            title: '⚠️ Surdosage', 
+                            items: [
+                                '🩸 Saignements (gencives, nez)',
+                                '🔴 Hématomes spontanés',
+                                '⚫ Selles noires/sang dans urines',
+                                '😴 Fatigue inexpliquée'
+                            ]
+                        },
+                        { 
+                            level: 'warn', 
+                            title: '⚠️ Sous-dosage', 
+                            items: [
+                                '🦵 Œdème/douleur mollet',
+                                '💨 Essoufflement soudain',
+                                '🧠 Mal de tête violent',
+                                '👄 Troubles parole/vision'
+                            ]
+                        },
+                        { 
+                            level: 'info', 
+                            title: '✅ Action', 
+                            items: [
+                                '📞 Avis médical si signes',
+                                '👀 Surveillance vigilante',
+                                '📝 Noter dans carnet AVK',
+                                '🚨 Urgences si grave'
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'deroule',
+                    type: 'steps',
+                    title: 'Déroulé de l\'entretien (année 1)',
+                    steps: [
+                        { title: 'Entretien 1 — Évaluation', text: 'Historique, indication, résultats INR récents, observance, alimentation habituelle, alcool, interactions/polymédication.' },
+                        { title: 'Entretien 2 — Module prioritaire', text: 'Régime vit K & interactions OU observance & carnet AVK (selon besoins principaux).' },
+                        { title: 'Entretien 3 — 2e module + bilan', text: 'Consolider les messages, plan écrit (signes d\'alerte, conduite, dates de contrôle), coordination MT.' }
+                    ],
+                    note: 'Années suivantes : 2 entretiens de suivi (ASS) centrés sur INR, événements, chirurgies prévues.'
+                },
+                {
+                    id: 'aliments-vitk',
+                    type: 'pie',
+                    title: 'Aliments riches en vitamine K',
+                    data: [
+                        { name: 'Légumes verts', value: 45, color: '#00b894' },
+                        { name: 'Huiles végétales', value: 25, color: '#fdcb6e' },
+                        { name: 'Foie/abats', value: 20, color: '#e17055' },
+                        { name: 'Autres', value: 10, color: '#74b9ff' }
+                    ]
+                },
+                {
+                    id: 'module-regime',
+                    type: 'module',
+                    icon: '🥗',
+                    title: 'Module — Vitamine K & alimentation',
+                    points: [
+                        'Régime STABLE : ni excès ni carence — éviter les « cures détox » vertes ponctuelles',
+                        'Aucun aliment n\'est interdit. L\'apport en vitamine K doit être régulier et sans excès afin de ne pas perturber l\'équilibre de l\'INR',
+                        'Aliments les plus riches en vitamine K : brocolis, choux, chou-fleur, choux de Bruxelles, épinards, laitue, tomates',
+                        'Lister autres aliments riches : persil, foie, certaines huiles',
+                        'Alcool : modération ; éviter les ivresses → variation INR',
+                        'Adapter le discours : « gardez vos habitudes, notez tout changement notable »'
+                    ],
+                    conseil: 'Expliquer que c\'est la VARIATION rapide d\'apport en vit K qui déstabilise l\'INR. Informer le patient sur les aliments les plus riches en vitamine K.'
+                },
+                {
+                    id: 'module-interactions',
+                    type: 'module',
+                    icon: '💊',
+                    title: 'Module — Interactions & automédication',
+                    points: [
+                        'Médicaments : antibiotiques/antifongiques, amiodarone, AINS, antalgie sans avis = risque',
+                        'Phytothérapie/compléments : millepertuis, ginkgo, ginseng… prudence',
+                        'Toujours demander conseil avant tout nouveau traitement ou complément'
+                    ],
+                    conseil: 'Vérifier systématiquement la co-prescription et l\'alcool ; proposer alternatives sans AINS.'
+                },
+                {
+                    id: 'module-observance',
+                    type: 'module',
+                    icon: '🗓️',
+                    title: 'Module — Observance & carnet AVK',
+                    points: [
+                        'Remplir le carnet AVK (doses / INR / RDV labo), apporter l\'outil à chaque passage',
+                        'En cas d\'oubli, la dose omise peut être prise dans un délai de 8 heures après l\'heure habituelle',
+                        'Passé ce délai, il est préférable de sauter cette prise et de prendre la suivante à l\'heure habituelle',
+                        'Le patient ne doit pas prendre de double dose pour compenser la dose manquée',
+                        'Il devra signaler cet oubli lors du contrôle de son INR et le noter dans son carnet de suivi',
+                        'Jours/doses variables : utiliser piluliers, alarmes ; bannir l\'auto-ajustement',
+                        'Signes d\'alerte à connaître : saignements inhabituels, hématomes, hématurie, épistaxis prolongée'
+                    ],
+                    conseil: 'Une personne aidante peut relire le carnet avec le patient si nécessaire.'
+                },
+                {
+                    id: 'situations',
+                    type: 'callouts',
+                    title: 'Situations à risque — conduites à tenir',
+                    callouts: [
+                        { level: 'danger', title: 'INR haut', text: 'Suspendre l\'AVK ; avis médical ; vitamine K possible selon protocole médical ; surveiller signes hémorragiques.' },
+                        { level: 'warn', title: 'INR bas', text: 'Ne pas doubler seul ; avis médical pour ajustement ; vérifier prises/interaction récente.' },
+                        { level: 'info', title: 'Avant chirurgie/acte invasif', text: 'Anticiper : arrêt AVK selon protocole et relais HBPM si indiqué ; le pharmacien s\'assure du plan.' }
+                    ]
+                },
+                {
+                    id: 'vie-quotidienne',
+                    type: 'bullets',
+                    title: 'Vie quotidienne — conseils pratiques',
+                    bullets: [
+                        'Rasage électrique, brosse à dents souple ; éviter sports de contact',
+                        'Limiter alcool ; prévenir en cas d\'oubli ou de vomissements (ne pas compenser à l\'aveugle)',
+                        'Toujours porter la carte anticoagulant'
+                    ]
+                },
+                {
+                    id: 'cas-pratiques',
+                    type: 'cases',
+                    title: 'Mini-cas pratiques (extraits corpus)',
+                    cases: [
+                        {
+                            title: 'INR en yo-yo ← régime yo-yo',
+                            story: 'Mme G., FA sous warfarine : cures « jus verts » 1 semaine/mois → INR instable. Solution : expliquer vit K, stabiliser l\'alimentation ; INR revient dans la cible.'
+                        },
+                        {
+                            title: 'Patient confus — sécurisation à domicile',
+                            story: 'Mr P., 80 ans, erreurs répétées. Coordination MT/SSIAD : semainier AVK préparé par IDE + relais officine → plus d\'erreurs.'
+                        },
+                        {
+                            title: 'Chirurgie mal anticipée',
+                            story: 'Mme D., SAPL : pensait arrêter la veille. Vérification officine → arrêt 5 j + relais HBPM planifié avec MT/CH ; opération sans incident.'
+                        }
+                    ]
+                },
+                {
+                    id: 'facturation',
+                    type: 'table',
+                    title: 'Facturation — codes & règles',
+                    table: [
+                        { code: 'TAC', libelle: 'Adhésion (traceur)', montant: '0,01 €', prise: 'AMO 100%', note: 'À l\'adhésion, unique' },
+                        { code: 'ASI', libelle: 'Année 1 — 3 entretiens', montant: '15 € + 15 € + 20 €', prise: 'AMO 70%', note: 'Éval + module + bilan' },
+                        { code: 'ASS', libelle: 'Années suivantes — 2 entretiens', montant: '10 € + 20 €', prise: 'AMO 70%', note: 'Suivi annuel' }
+                    ],
+                    notes: [
+                        'Acte isolé : non cumulable le même jour sur le même flux',
+                        'Tiers payant ; indiquer RPPS pharmacien ; respecter fréquence (Année 1 = 3, Années suivantes = 2)'
+                    ]
+                },
+                {
+                    id: 'messages',
+                    type: 'messages',
+                    title: 'Messages clés au comptoir',
+                    cards: [
+                        '« Ne changez jamais la dose seul : appelez d\'abord. »',
+                        '« Régime stable : évitez les cures "détox". »',
+                        '« Carte anticoagulant toujours sur vous. »',
+                        '« Dites-nous tout nouveau médicament ou complément. »'
+                    ]
+                },
+                {
+                    id: 'synthese',
+                    type: 'summary',
+                    title: 'À retenir',
+                    points: [
+                        'INR expliqué et suivi = coeur de l\'accompagnement',
+                        'Deux modules phares : alimentation/Interactions + Observance/Carnet',
+                        'Anticiper les actes invasifs (relais HBPM) ; coordonner avec MT',
+                        'Facturer correctement TAC/ASI/ASS ; tracer systématiquement'
+                    ]
+                },
+                {
+                    id: 'fin',
+                    type: 'conclusion',
+                    title: 'Accompagnement AVK — prêt à déployer',
+                    subtitle: 'Stabiliser l\'INR, prévenir hémorragies et thromboses'
+                }
+            ];
 
-        function renderSlide(slide) {
-            const content = document.getElementById('slideContent');
-            content.innerHTML = '';
-            content.className = 'slide-content';
+            let currentSlide = 0;
+            const totalSlides = slides.length;
 
-            switch(slide.type) {
-                case 'title':
-                case 'conclusion':
-                    content.innerHTML = `
-                        <div class="title-slide">
-                            <div class="icon-container">
-                                <svg width="80" height="80" fill="none" stroke="white" stroke-width="2">
-                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                                    <path d="M12 8v13M8 12h8"/>
-                                </svg>
-                            </div>
-                            <h1>${slide.title}</h1>
-                            ${slide.subtitle ? `<p class="subtitle">${slide.subtitle}</p>` : ''}
-                        </div>
-                    `;
-                    break;
+            function renderSlide(slide) {
+                const content = document.getElementById('slideContent');
+                if (!content) return;
+                
+                content.innerHTML = '';
+                content.className = 'slide-content';
 
-                case 'bullets':
-                    content.innerHTML = `
-                        <h2>${slide.title}</h2>
-                        <div class="card">
-                            <ul class="bullets">
-                                ${slide.bullets.map(b => `<li>${b}</li>`).join('')}
-                            </ul>
-                        </div>
-                    `;
-                    break;
-
-                case 'info':
-                    content.innerHTML = `
-                        <h2>${slide.title}</h2>
-                        <div class="card">
-                            <ul class="bullets">
-                                ${slide.items.map(item => `<li>${item}</li>`).join('')}
-                            </ul>
-                            ${slide.tip ? `
-                                <div class="conseil-box">
-                                    <h4>💡 Conseil</h4>
-                                    <p>${slide.tip}</p>
+                switch(slide.type) {
+                    case 'title':
+                    case 'conclusion':
+                        content.innerHTML = `
+                            <div class="title-slide">
+                                <div class="icon-container">
+                                    <svg width="80" height="80" fill="none" stroke="white" stroke-width="2">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                        <path d="M12 8v13M8 12h8"/>
+                                    </svg>
                                 </div>
-                            ` : ''}
-                        </div>
-                    `;
-                    break;
+                                <h1>${slide.title}</h1>
+                                ${slide.subtitle ? `<p class="subtitle">${slide.subtitle}</p>` : ''}
+                            </div>
+                        `;
+                        break;
 
-                case 'inr':
-                    content.innerHTML = `
-                        <h2>${slide.title}</h2>
-                        <div class="inr-chart">
-                            <div class="inr-zones">
-                                ${slide.zones.map(zone => `
-                                    <div class="inr-zone ${zone.color}">
-                                        <div>
-                                            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">${zone.name}</div>
-                                            <div style="font-size: 0.9rem; opacity: 0.9;">${zone.label}</div>
+                    case 'bullets':
+                        content.innerHTML = `
+                            <h2>${slide.title}</h2>
+                            <div class="card">
+                                <ul class="bullets">
+                                    ${slide.bullets.map(b => `<li>${b}</li>`).join('')}
+                                </ul>
+                            </div>
+                        `;
+                        break;
+
+                    case 'info':
+                        content.innerHTML = `
+                            <h2>${slide.title}</h2>
+                            <div class="card">
+                                <ul class="bullets">
+                                    ${slide.items.map(item => `<li>${item}</li>`).join('')}
+                                </ul>
+                                ${slide.tip ? `
+                                    <div class="conseil-box">
+                                        <h4>💡 Conseil</h4>
+                                        <p>${slide.tip}</p>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        `;
+                        break;
+
+                    case 'inr':
+                        content.innerHTML = `
+                            <h2>${slide.title}</h2>
+                            <div class="inr-chart">
+                                <div class="inr-zones">
+                                    ${slide.zones.map(zone => `
+                                        <div class="inr-zone ${zone.color}">
+                                            <div>
+                                                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">${zone.name}</div>
+                                                <div style="font-size: 0.9rem; opacity: 0.9;">${zone.label}</div>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                                <p style="text-align: center; margin-top: 2rem; color: #5f6368;">
+                                    L'objectif est de maintenir l'INR dans la zone thérapeutique pour équilibrer efficacité et sécurité
+                                </p>
+                                ${slide.additionalInfo ? `
+                                    <div style="background: rgba(255, 255, 255, 0.95); border-left: 4px solid #ff6b6b; padding: 1.2rem; margin-top: 1.5rem; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                                        <p style="color: #2d3436; line-height: 1.8; font-size: 1.05rem; white-space: pre-line; font-weight: 500;">${slide.additionalInfo}</p>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        `;
+                        break;
+
+                    case 'cards':
+                        content.innerHTML = `
+                            <h2>${slide.title}</h2>
+                            <div class="info-grid">
+                                ${slide.cards.map(card => `
+                                    <div class="info-card">
+                                        <p style="font-size: 1.1rem; line-height: 1.8; color: #2d3436;">${card}</p>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `;
+                        break;
+
+                    case 'steps':
+                        content.innerHTML = `
+                            <h2>${slide.title}</h2>
+                            <div class="steps-container">
+                                ${slide.steps.map((step, i) => `
+                                    <div class="step-item">
+                                        <div class="step-number">${i + 1}</div>
+                                        <div class="step-content">
+                                            <h3>${step.title}</h3>
+                                            <p>${step.text}</p>
                                         </div>
                                     </div>
                                 `).join('')}
                             </div>
-                            <p style="text-align: center; margin-top: 2rem; color: #5f6368;">
-                                L'objectif est de maintenir l'INR dans la zone thérapeutique pour équilibrer efficacité et sécurité
-                            </p>
-                        </div>
-                    `;
-                    break;
+                            ${slide.note ? `<p style="margin-top: 1.5rem; color: #5f6368; font-style: italic;">ℹ️ ${slide.note}</p>` : ''}
+                        `;
+                        break;
 
-                case 'cards':
-                    content.innerHTML = `
-                        <h2>${slide.title}</h2>
-                        <div class="info-grid">
-                            ${slide.cards.map(card => `
-                                <div class="info-card">
-                                    <p style="font-size: 1.1rem; line-height: 1.8; color: #2d3436;">${card}</p>
-                                </div>
-                            `).join('')}
-                        </div>
-                    `;
-                    break;
-
-                case 'steps':
-                    content.innerHTML = `
-                        <h2>${slide.title}</h2>
-                        <div class="steps-container">
-                            ${slide.steps.map((step, i) => `
-                                <div class="step-item">
-                                    <div class="step-number">${i + 1}</div>
-                                    <div class="step-content">
-                                        <h3>${step.title}</h3>
-                                        <p>${step.text}</p>
+                    case 'pie':
+                        const total = slide.data.reduce((sum, item) => sum + item.value, 0);
+                        let cumulativePercent = 0;
+                        
+                        content.innerHTML = `
+                            <h2>${slide.title}</h2>
+                            <div class="inr-chart">
+                                <div class="pie-chart">
+                                    <svg viewBox="0 0 100 100">
+                                        ${slide.data.map((item, i) => {
+                                            const percent = (item.value / total) * 100;
+                                            const startAngle = (cumulativePercent * 360) / 100;
+                                            const endAngle = ((cumulativePercent + percent) * 360) / 100;
+                                            const largeArcFlag = endAngle - startAngle > 180 ? 1 : 0;
+                                            
+                                            const startX = 50 + 45 * Math.cos((startAngle * Math.PI) / 180);
+                                            const startY = 50 + 45 * Math.sin((startAngle * Math.PI) / 180);
+                                            const endX = 50 + 45 * Math.cos((endAngle * Math.PI) / 180);
+                                            const endY = 50 + 45 * Math.sin((endAngle * Math.PI) / 180);
+                                            
+                                            const path = `M 50 50 L ${startX} ${startY} A 45 45 0 ${largeArcFlag} 1 ${endX} ${endY} Z`;
+                                            
+                                            cumulativePercent += percent;
+                                            
+                                            return `
+                                                <path d="${path}" fill="${item.color}" stroke="white" stroke-width="2" 
+                                                      opacity="0.9" style="transition: all 0.3s ease; cursor: pointer;"
+                                                      onmouseover="this.style.opacity='1'; this.style.transform='scale(1.05)'"
+                                                      onmouseout="this.style.opacity='0.9'; this.style.transform='scale(1)'"/>
+                                            `;
+                                        }).join('')}
+                                        <circle cx="50" cy="50" r="25" fill="white"/>
+                                    </svg>
+                                    <div class="pie-chart-center">
+                                        <div class="value">${total}%</div>
+                                        <div class="label">Répartition</div>
                                     </div>
                                 </div>
-                            `).join('')}
-                        </div>
-                        ${slide.note ? `<p style="margin-top: 1.5rem; color: #5f6368; font-style: italic;">ℹ️ ${slide.note}</p>` : ''}
-                    `;
-                    break;
-
-                case 'pie':
-                    const total = slide.data.reduce((sum, item) => sum + item.value, 0);
-                    let cumulativePercent = 0;
-                    
-                    content.innerHTML = `
-                        <h2>${slide.title}</h2>
-                        <div class="inr-chart">
-                            <div class="pie-chart">
-                                <svg viewBox="0 0 100 100">
-                                    ${slide.data.map((item, i) => {
-                                        const percent = (item.value / total) * 100;
-                                        const startAngle = (cumulativePercent * 360) / 100;
-                                        const endAngle = ((cumulativePercent + percent) * 360) / 100;
-                                        const largeArcFlag = endAngle - startAngle > 180 ? 1 : 0;
-                                        
-                                        const startX = 50 + 45 * Math.cos((startAngle * Math.PI) / 180);
-                                        const startY = 50 + 45 * Math.sin((startAngle * Math.PI) / 180);
-                                        const endX = 50 + 45 * Math.cos((endAngle * Math.PI) / 180);
-                                        const endY = 50 + 45 * Math.sin((endAngle * Math.PI) / 180);
-                                        
-                                        const path = `M 50 50 L ${startX} ${startY} A 45 45 0 ${largeArcFlag} 1 ${endX} ${endY} Z`;
-                                        
-                                        cumulativePercent += percent;
-                                        
-                                        return `
-                                            <path d="${path}" fill="${item.color}" stroke="white" stroke-width="2" 
-                                                  opacity="0.9" style="transition: all 0.3s ease; cursor: pointer;"
-                                                  onmouseover="this.style.opacity='1'; this.style.transform='scale(1.05)'"
-                                                  onmouseout="this.style.opacity='0.9'; this.style.transform='scale(1)'"/>
-                                        `;
-                                    }).join('')}
-                                    <circle cx="50" cy="50" r="25" fill="white"/>
-                                </svg>
-                                <div class="pie-chart-center">
-                                    <div class="value">${total}%</div>
-                                    <div class="label">Répartition</div>
+                                <div class="pie-chart-legend">
+                                    ${slide.data.map(item => `
+                                        <div class="legend-item">
+                                            <div class="legend-color" style="background: ${item.color};"></div>
+                                            <span><strong>${item.name}</strong> (${item.value}%)</span>
+                                        </div>
+                                    `).join('')}
                                 </div>
                             </div>
-                            <div class="pie-chart-legend">
-                                ${slide.data.map(item => `
-                                    <div class="legend-item">
-                                        <div class="legend-color" style="background: ${item.color};"></div>
-                                        <span><strong>${item.name}</strong> (${item.value}%)</span>
+                        `;
+                        break;
+
+                    case 'module':
+                        content.innerHTML = `
+                            <div class="module-header">
+                                <div class="module-icon">${slide.icon}</div>
+                                <h2>${slide.title}</h2>
+                            </div>
+                            <div class="card">
+                                <ul class="bullets">
+                                    ${slide.points.map(p => `<li>${p}</li>`).join('')}
+                                </ul>
+                                ${slide.conseil ? `
+                                    <div class="conseil-box">
+                                        <h4>Conseil pratique</h4>
+                                        <p>${slide.conseil}</p>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        `;
+                        break;
+
+                    case 'callouts-visual':
+                        content.innerHTML = `
+                            <h2>${slide.title}</h2>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                                ${slide.callouts.map(c => `
+                                    <div class="callout callout-${c.level}" style="padding: 1.8rem;">
+                                        <h3 style="font-size: 1.4rem; margin-bottom: 1.2rem;">${c.title}</h3>
+                                        <ul style="list-style: none; padding: 0;">
+                                            ${c.items.map(item => `
+                                                <li style="padding: 0.4rem 0; font-size: 1.1rem; color: ${c.level === 'danger' ? '#721c24' : c.level === 'warn' ? '#856404' : '#004085'};">
+                                                    ${item}
+                                                </li>
+                                            `).join('')}
+                                        </ul>
                                     </div>
                                 `).join('')}
                             </div>
-                        </div>
-                    `;
-                    break;
+                        `;
+                        break;
 
-                case 'module':
-                    content.innerHTML = `
-                        <div class="module-header">
-                            <div class="module-icon">${slide.icon}</div>
+                    case 'callouts':
+                        content.innerHTML = `
                             <h2>${slide.title}</h2>
-                        </div>
-                        <div class="card">
-                            <ul class="bullets">
-                                ${slide.points.map(p => `<li>${p}</li>`).join('')}
-                            </ul>
-                            ${slide.conseil ? `
-                                <div class="conseil-box">
-                                    <h4>Conseil pratique</h4>
-                                    <p>${slide.conseil}</p>
+                            ${slide.callouts.map(c => `
+                                <div class="callout callout-${c.level}">
+                                    <h3>${c.title}</h3>
+                                    <p>${c.text}</p>
+                                </div>
+                            `).join('')}
+                        `;
+                        break;
+
+                    case 'cases':
+                        content.innerHTML = `
+                            <h2>${slide.title}</h2>
+                            ${slide.cases.map(c => `
+                                <div class="case-card">
+                                    <h3>${c.title}</h3>
+                                    <p>${c.story}</p>
+                                </div>
+                            `).join('')}
+                        `;
+                        break;
+
+                    case 'table':
+                        content.innerHTML = `
+                            <h2>${slide.title}</h2>
+                            <div class="table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Code</th>
+                                            <th>Libellé</th>
+                                            <th>Montant</th>
+                                            <th>Prise en charge</th>
+                                            <th>Note</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${slide.table.map(row => `
+                                            <tr>
+                                                <td><strong style="color: #ff6b6b;">${row.code}</strong></td>
+                                                <td>${row.libelle}</td>
+                                                <td>${row.montant}</td>
+                                                <td>${row.prise}</td>
+                                                <td style="font-size: 0.9rem; color: #5f6368;">${row.note}</td>
+                                            </tr>
+                                        `).join('')}
+                                    </tbody>
+                                </table>
+                            </div>
+                            ${slide.notes ? `
+                                <div class="card" style="margin-top: 1.5rem;">
+                                    <ul style="list-style: disc; padding-left: 1.5rem; color: #5f6368;">
+                                        ${slide.notes.map(n => `<li>${n}</li>`).join('')}
+                                    </ul>
                                 </div>
                             ` : ''}
-                        </div>
-                    `;
-                    break;
+                        `;
+                        break;
 
-                case 'callouts':
-                    content.innerHTML = `
-                        <h2>${slide.title}</h2>
-                        ${slide.callouts.map(c => `
-                            <div class="callout callout-${c.level}">
-                                <h3>${c.title}</h3>
-                                <p>${c.text}</p>
-                            </div>
-                        `).join('')}
-                    `;
-                    break;
-
-                case 'cases':
-                    content.innerHTML = `
-                        <h2>${slide.title}</h2>
-                        ${slide.cases.map(c => `
-                            <div class="case-card">
-                                <h3>${c.title}</h3>
-                                <p>${c.story}</p>
-                            </div>
-                        `).join('')}
-                    `;
-                    break;
-
-                case 'table':
-                    content.innerHTML = `
-                        <h2>${slide.title}</h2>
-                        <div class="table-container">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Code</th>
-                                        <th>Libellé</th>
-                                        <th>Montant</th>
-                                        <th>Prise en charge</th>
-                                        <th>Note</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    ${slide.table.map(row => `
-                                        <tr>
-                                            <td><strong style="color: #ff6b6b;">${row.code}</strong></td>
-                                            <td>${row.libelle}</td>
-                                            <td>${row.montant}</td>
-                                            <td>${row.prise}</td>
-                                            <td style="font-size: 0.9rem; color: #5f6368;">${row.note}</td>
-                                        </tr>
-                                    `).join('')}
-                                </tbody>
-                            </table>
-                        </div>
-                        ${slide.notes ? `
-                            <div class="card" style="margin-top: 1.5rem;">
-                                <ul style="list-style: disc; padding-left: 1.5rem; color: #5f6368;">
-                                    ${slide.notes.map(n => `<li>${n}</li>`).join('')}
-                                </ul>
-                            </div>
-                        ` : ''}
-                    `;
-                    break;
-
-                case 'messages':
-                    content.innerHTML = `
-                        <h2>${slide.title}</h2>
-                        <div class="messages-grid">
-                            ${slide.cards.map(card => `
-                                <div class="message-card">
-                                    <p>${card}</p>
-                                </div>
-                            `).join('')}
-                        </div>
-                    `;
-                    break;
-
-                case 'summary':
-                    content.innerHTML = `
-                        <div class="title-slide">
-                            <div class="icon-container">
-                                <svg width="80" height="80" fill="none" stroke="white" stroke-width="3">
-                                    <path d="M9 11l3 3L22 4"/>
-                                    <circle cx="12" cy="12" r="10"/>
-                                </svg>
-                            </div>
-                            <h1>${slide.title}</h1>
-                            <div class="summary-points">
-                                ${slide.points.map(p => `
-                                    <div class="summary-point">${p}</div>
+                    case 'messages':
+                        content.innerHTML = `
+                            <h2>${slide.title}</h2>
+                            <div class="messages-grid">
+                                ${slide.cards.map(card => `
+                                    <div class="message-card">
+                                        <p>${card}</p>
+                                    </div>
                                 `).join('')}
                             </div>
-                        </div>
-                    `;
-                    break;
+                        `;
+                        break;
+
+                    case 'summary':
+                        content.innerHTML = `
+                            <div class="title-slide">
+                                <div class="icon-container">
+                                    <svg width="80" height="80" fill="none" stroke="white" stroke-width="3">
+                                        <path d="M9 11l3 3L22 4"/>
+                                        <circle cx="12" cy="12" r="10"/>
+                                    </svg>
+                                </div>
+                                <h1>${slide.title}</h1>
+                                <div class="summary-points">
+                                    ${slide.points.map(p => `
+                                        <div class="summary-point">${p}</div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        `;
+                        break;
+                }
             }
-        }
 
-        function updateProgress() {
-            const progress = ((currentSlide + 1) / totalSlides) * 100;
-            document.getElementById('progressBar').style.width = progress + '%';
-            document.getElementById('slideNumber').textContent = currentSlide + 1;
-        }
+            function updateProgress() {
+                const progress = ((currentSlide + 1) / totalSlides) * 100;
+                const progressBar = document.getElementById('progressBar');
+                if (progressBar) {
+                    progressBar.style.width = progress + '%';
+                }
+                const slideNumber = document.getElementById('slideNumber');
+                if (slideNumber) {
+                    slideNumber.textContent = currentSlide + 1;
+                }
+            }
 
-        function changeSlide(direction) {
-            currentSlide += direction;
-            
-            if (currentSlide < 0) currentSlide = 0;
-            if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
-            
-            renderSlide(slides[currentSlide]);
+            function changeSlide(direction) {
+                currentSlide += direction;
+                
+                if (currentSlide < 0) currentSlide = 0;
+                if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+                
+                renderSlide(slides[currentSlide]);
+                updateProgress();
+                
+                // Update navigation buttons
+                const prevBtn = document.getElementById('prevBtn');
+                const nextBtn = document.getElementById('nextBtn');
+                if (prevBtn) prevBtn.disabled = currentSlide === 0;
+                if (nextBtn) nextBtn.disabled = currentSlide === totalSlides - 1;
+            }
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' || e.key === ' ') changeSlide(1);
+                if (e.key === 'ArrowLeft') changeSlide(-1);
+            });
+
+            // Touch/swipe support
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            document.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+
+            document.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+
+            function handleSwipe() {
+                if (touchEndX < touchStartX - 50) changeSlide(1);
+                if (touchEndX > touchStartX + 50) changeSlide(-1);
+            }
+
+            // Add click handlers to buttons
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => changeSlide(-1));
+            }
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => changeSlide(1));
+            }
+
+            // Initialize
+            const totalSlidesElement = document.getElementById('totalSlides');
+            if (totalSlidesElement) {
+                totalSlidesElement.textContent = totalSlides;
+            }
+            renderSlide(slides[0]);
             updateProgress();
-            
-            // Update navigation buttons
-            document.getElementById('prevBtn').disabled = currentSlide === 0;
-            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
-        }
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === ' ') changeSlide(1);
-            if (e.key === 'ArrowLeft') changeSlide(-1);
         });
-
-        // Touch/swipe support
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        document.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-
-        document.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
-
-        function handleSwipe() {
-            if (touchEndX < touchStartX - 50) changeSlide(1);
-            if (touchEndX > touchStartX + 50) changeSlide(-1);
-        }
-
-        // Initialize
-        document.getElementById('totalSlides').textContent = totalSlides;
-        renderSlide(slides[0]);
-        updateProgress();
     </script>
 </body>
 </html>
