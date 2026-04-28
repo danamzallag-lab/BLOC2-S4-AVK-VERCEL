@@ -1177,6 +1177,192 @@
             min-height: 100%;
         }
 
+        /* === Nouvelles animations SVG (mécanismes biologiques) === */
+        @keyframes avkFlowDown {
+            0% { transform: translateY(-100%); opacity: 0.3; }
+            100% { transform: translateY(330%); opacity: 0.3; }
+        }
+
+        @keyframes vkorBlock {
+            0%, 50% { fill: #00b894; filter: drop-shadow(0 0 6px #00b894); }
+            55% { fill: #ee5a24; }
+            60%, 100% { fill: #5f6368; opacity: 0.6; }
+        }
+
+        @keyframes factorFade {
+            0%, 60% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0.2; transform: scale(0.7); }
+        }
+
+        @keyframes inrPulse {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px currentColor); }
+            50% { transform: scale(1.08); filter: drop-shadow(0 0 16px currentColor); }
+        }
+
+        /* Render types pour AVK animés */
+        .avk-mechanism-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            align-items: stretch;
+        }
+
+        .avk-mechanism-svg {
+            background: white;
+            border-radius: 24px;
+            padding: 1.5rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .case-detailed-card {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            margin-bottom: 1.5rem;
+        }
+
+        .case-detailed-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(255, 107, 107, 0.1);
+            margin-bottom: 1rem;
+        }
+
+        .case-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+            flex-shrink: 0;
+        }
+
+        .case-tag {
+            background: rgba(254, 202, 87, 0.2);
+            color: #f39c12;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border: 1px solid rgba(254, 202, 87, 0.5);
+            white-space: nowrap;
+        }
+
+        .case-section {
+            background: rgba(0,0,0,0.02);
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 0.8rem;
+        }
+
+        .case-section.flags { border-left: 4px solid #f39c12; }
+        .case-section.questions { border-left: 4px solid #74b9ff; }
+        .case-section.actions { border-left: 4px solid #00b894; }
+        .case-section.takeaway {
+            background: linear-gradient(135deg, rgba(0, 184, 148, 0.08), rgba(116, 185, 255, 0.05));
+            border-left: 4px solid #00856a;
+        }
+
+        .case-section-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .advice-why-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 0.5rem;
+        }
+
+        .advice-why-table th {
+            background: linear-gradient(90deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            padding: 0.8rem 1rem;
+            text-align: left;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .advice-why-table th:first-child { border-radius: 12px 0 0 12px; }
+        .advice-why-table th:last-child { border-radius: 0 12px 12px 0; }
+
+        .advice-why-table td {
+            background: white;
+            padding: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .advice-why-table td:first-child {
+            border-radius: 12px 0 0 12px;
+            font-weight: 700;
+            color: #2d3436;
+        }
+
+        .advice-why-table td:last-child {
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+            color: #ee5a24;
+        }
+
+        .memo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+        }
+
+        .memo-section {
+            background: white;
+            border-radius: 20px;
+            padding: 1.4rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .memo-section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .memo-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .memo-section li {
+            padding: 0.4rem 0 0.4rem 1.4rem;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            position: relative;
+        }
+
+        .memo-section li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .avk-mechanism-grid { grid-template-columns: 1fr !important; }
+            .memo-grid { grid-template-columns: 1fr !important; }
+            .advice-why-table { font-size: 0.85rem; }
+            .advice-why-table td, .advice-why-table th { padding: 0.7rem; }
+        }
+
         /* Hide elements */
         .hidden {
             display: none;
@@ -1270,6 +1456,43 @@
                         'Adhésion volontaire : bulletin signé ; officine référente unique pour la facturation'
                     ],
                     tip: 'Paramétrer des alertes DP/logiciel sur délivrances AVK et INR hors cible rapportés par le patient.'
+                },
+                {
+                    id: 'mecanisme-avk',
+                    type: 'mechanism-avk',
+                    title: 'Mécanisme d\'action des AVK — comment ça marche',
+                    steps: [
+                        { title: 'Absorption hépatique', text: 'L\'AVK (warfarine, acénocoumarol ou fluindione) est absorbé par voie orale et atteint l\'hépatocyte, où s\'effectue la synthèse des facteurs de la coagulation.' },
+                        { title: 'Inhibition de VKORC1', text: 'L\'AVK bloque l\'enzyme VKORC1 (Vitamin K Epoxide Reductase Complex 1), qui régénère normalement la vitamine K active à partir de sa forme oxydée.' },
+                        { title: 'Chute de la vitamine K active', text: 'Sans VKORC1, la vitamine K hydroquinone (forme active) ne peut plus se reformer. La γ-carboxylation hépatique des facteurs vit K-dépendants devient impossible.' },
+                        { title: 'Facteurs II, VII, IX, X non fonctionnels', text: 'Les facteurs II (prothrombine), VII, IX, X et les protéines C et S ne sont plus carboxylés correctement. Ils sont produits mais inactifs : c\'est l\'effet anticoagulant.' }
+                    ],
+                    delayExplanation: 'L\'effet plein nécessite <strong>3 à 5 jours</strong> car les facteurs déjà préformés circulent en attendant leur élimination naturelle. Demi-vies : F.VII et protéine C ~6 h (chutent vite), F.X et F.II 2 à 3 jours (chutent lentement) — c\'est le F.II qui dicte le délai. C\'est aussi pourquoi à l\'instauration on relaie souvent par héparine pendant les 3-5 premiers jours, et pourquoi la vitamine K (Vidal) antagonise rapidement en cas de surdosage.'
+                },
+                {
+                    id: 'cascade-coag',
+                    type: 'cascade-coag',
+                    title: 'Cascade de coagulation — où agissent AVK, AOD et héparines',
+                    targets: [
+                        { classe: 'AVK (warfarine, acéno, fluindione)', cible: 'F.II, VII, IX, X', action: 'Bloque la synthèse des facteurs vit K-dépendants — action lente (3-5 j), surveillance INR.', color: '#d63031', bg: 'rgba(214, 48, 49, 0.08)' },
+                        { classe: 'Héparine non fractionnée (HNF)', cible: 'F.Xa + F.IIa', action: 'Active l\'antithrombine, qui inhibe Xa et IIa. Voie IV/SC, surveillance TCA.', color: '#0984e3', bg: 'rgba(9, 132, 227, 0.08)' },
+                        { classe: 'HBPM (énoxaparine, tinzaparine…)', cible: 'F.Xa principalement', action: 'Inhibition préférentielle du Xa via antithrombine. Voie SC, dose-poids, anti-Xa si insuffisance rénale.', color: '#00b894', bg: 'rgba(0, 184, 148, 0.08)' },
+                        { classe: 'AOD anti-Xa (rivaroxaban, apixaban, édoxaban)', cible: 'F.Xa direct', action: 'Inhibition directe du Xa, sans antithrombine. Voie orale, pas de surveillance INR.', color: '#fdcb6e', bg: 'rgba(253, 203, 110, 0.12)' },
+                        { classe: 'AOD anti-IIa (dabigatran)', cible: 'F.IIa direct (thrombine)', action: 'Inhibition directe de la thrombine. Voie orale, attention insuffisance rénale.', color: '#feca57', bg: 'rgba(254, 202, 87, 0.15)' }
+                    ],
+                    tip: 'Au comptoir : un patient sous AVK qui démarre un AOD ne doit JAMAIS prendre les deux en même temps. Le switch impose une fenêtre encadrée (INR cible avant l\'AOD).'
+                },
+                {
+                    id: 'pharmaco-avk',
+                    type: 'pharmaco-bars',
+                    title: 'Demi-vies des 3 AVK français — conséquences pratiques',
+                    intro: 'Connaître la demi-vie aide à comprendre la fréquence d\'administration et la rapidité d\'adaptation à un changement de dose.',
+                    molecules: [
+                        { name: 'Warfarine — Coumadine®', halfLife: '35 à 45 h', label: 'Demi-vie longue', barWidth: '85%', color1: '#ff7675', color2: '#d63031', note: 'Standard mondial. Demi-vie longue → stabilité, 1 prise/jour le soir. Adaptation lente aux changements de dose (2-3 j pour observer l\'effet).' },
+                        { name: 'Acénocoumarol — Sintrom® / Mini-Sintrom®', halfLife: '8 à 11 h', label: 'Demi-vie courte', barWidth: '22%', color1: '#feca57', color2: '#fdcb6e', note: 'Demi-vie courte → souvent 2 prises/jour pour Sintrom 4 mg, 1/jour pour Mini-Sintrom 1 mg. Adaptations rapides, mais plus de variations d\'INR si oubli ou retard.' },
+                        { name: 'Fluindione — Préviscan®', halfLife: '~ 31 h', label: 'Demi-vie moyenne', barWidth: '62%', color1: '#fab1a0', color2: '#e17055', note: '⚠️ Restriction ANSM 1ᵉʳ déc 2018 : pas en 1ʳᵉ intention (réactions immuno-allergiques 6 premiers mois). Maintien possible chez patients déjà équilibrés depuis > 6 mois.' }
+                    ],
+                    tip: 'Quel que soit l\'AVK, l\'effet plein nécessite 3 à 5 jours (lié à la demi-vie longue du facteur II ~60-72 h). C\'est pour ça qu\'à l\'instauration, on relaie en héparine pendant les 3-5 premiers jours.'
                 },
                 {
                     id: 'reperer-3v',
@@ -1432,6 +1655,20 @@
                     conseil: 'Vérifier systématiquement la co-prescription et l\'alcool ; proposer alternatives sans AINS.'
                 },
                 {
+                    id: 'interactions-radiales',
+                    type: 'target-radial-avk',
+                    title: 'Cartographie visuelle des interactions médicamenteuses majeures (Thésaurus ANSM)',
+                    drugs: [
+                        { name: 'AINS / Aspirine', effect: '↑ saignement', level: 'CI / Déconseillé', color: '#d63031', action: 'Aspirine ≥ 1 g/prise OU ≥ 3 g/j : CI. AINS : déconseillé. Doses antalgiques aspirine : déconseillé. Risque hémorragique majeur.' },
+                        { name: 'Daktarin / Miconazole', effect: '↑↑↑ INR', level: 'CI', color: '#c0392b', action: 'Y compris Daktarin gel buccal. Risque d\'hémorragies imprévisibles, éventuellement graves. Alternative : nystatine.' },
+                        { name: 'Millepertuis', effect: '↓ INR', level: 'CI', color: '#ee5a24', action: 'Inducteur enzymatique → ↓ INR → risque thrombotique. À intercepter sur OTC, plantes, compléments.' },
+                        { name: 'Fluconazole / Azolés', effect: '↑↑ INR', level: 'CI ou déconseillé', color: '#fdcb6e', action: 'Selon dose et durée. Voie systémique : risque ↑ INR majeur. Préférer alternatives quand possible.' },
+                        { name: 'Cotrimoxazole', effect: '↑ INR', level: 'Déconseillé', color: '#e17055', action: 'Bactrim®. Inhibe métabolisme AVK. Si indispensable, contrôle INR rapproché à J3-J5.' },
+                        { name: 'Amiodarone', effect: '↑ INR (long-terme)', level: 'Précaution', color: '#74b9ff', action: 'Effet retardé (8-15 j). Surveillance INR rapprochée pendant 4-8 semaines après instauration ou arrêt.' }
+                    ],
+                    tip: '<strong>Réflexe comptoir :</strong> à toute nouvelle ordonnance ou demande OTC chez un patient AVK → scanner ces 6 catégories avant délivrance. En cas de doute, MSS au médecin avec demande d\'INR à J3-J5.'
+                },
+                {
                     id: 'module-observance',
                     type: 'module',
                     icon: '🗓️',
@@ -1456,6 +1693,23 @@
                         { level: 'warn', title: 'INR bas', text: 'Ne pas doubler seul ; avis médical pour ajustement ; vérifier prises/interaction récente.' },
                         { level: 'info', title: 'Avant chirurgie/acte invasif', text: 'Arrêt AVK 4-5 jours avant le geste. Le relais par héparine (HBPM/HNF) à dose curative N\'EST PAS systématique — il est réservé aux patients à HAUT risque thromboembolique : valve mécanique, FA avec antécédent d\'AVC/embolie, MTEV < 3 mois (HAS 2008, GIHP, BRIDGE 2015). Pour les autres : arrêt simple sans relais. Reprise AVK 12-24 h après le geste si hémostase satisfaisante.' }
                     ]
+                },
+                {
+                    id: 'crisis-hemorragie',
+                    type: 'crisis-protocol-avk',
+                    title: 'Hémorragie sous AVK — protocole comptoir et urgence',
+                    minor: '<strong>Saignement de nez, gencive, petite plaie qui suinte :</strong> compression locale ferme pendant <strong>10 minutes minimum sans relâcher</strong>. Si saignement persiste après 10 min → appel médecin. Vérifier carnet INR récent. Conseiller au patient de doser l\'INR si > 7 jours sans contrôle. Ne JAMAIS arrêter l\'AVK seul sans avis médical.',
+                    major: '<strong>Hématémèse, méléna, hématurie macroscopique, hémoptysie, plaie qui saigne abondamment :</strong> appel SAMU 15 IMMÉDIAT. Allonger le patient si possible, jambes surélevées. Apporter ordonnance et carnet AVK aux secours. L\'arrêt de l\'AVK et l\'éventuelle administration de vitamine K relèvent du médecin (PPSB en milieu hospitalier si nécessaire).',
+                    gravitySigns: [
+                        'Hémorragie extériorisée non maîtrisée',
+                        'Pâleur intense + sueurs froides',
+                        'Tachycardie > 110/min',
+                        'Trouble de la conscience, confusion',
+                        'Dyspnée brutale (suspicion EP)',
+                        'Céphalée violente + déficit neurologique'
+                    ],
+                    coordination: 'À distance d\'un épisode hémorragique : MSS au médecin traitant pour signaler l\'événement, demander un INR récent et discuter d\'un éventuel ajustement de dose. Noter dans le DP. Renforcer l\'éducation patient (compression, signes d\'alerte, carte anticoagulant à toujours porter).',
+                    source: 'Source : HAS « Prise en charge des surdosages en AVK et des hémorragies » (2008, MAJ) ; GIHP recommandations gestion périopératoire et hémorragique sous antithrombotiques.'
                 },
                 {
                     id: 'special-previscan',
@@ -1502,34 +1756,92 @@
                 },
                 {
                     id: 'mises-en-situation',
-                    type: 'cases',
+                    type: 'case-detailed-avk',
                     title: 'Mises en situation comptoir — détecter le manquement, proposer l\'entretien',
                     cases: [
                         {
-                            title: 'Cas A — Patient qui demande du Doliprane après une chute',
-                            story: '<em>👤 Mr R., 70 ans, Coumadine pour FA depuis 18 mois. Vient acheter du Doliprane après s\'être cogné dans une porte la veille.</em><br><br><strong>Patient :</strong> <em>« Je voudrais du Doliprane, je me suis cogné hier, ça me lance un peu. »</em><br><strong>Préparateur :</strong> <em>« Bien sûr. Vous avez vu un bleu apparaître ? Quelque chose d\'inhabituel ? »</em><br><strong>Patient :</strong> <em>« Oui, un bleu plus gros que d\'habitude, ça m\'a surpris. »</em><br><strong>Préparateur :</strong> <em>« Je vois. Vous savez à partir de quand un bleu ou un saignement doit vous alerter chez quelqu\'un sous Coumadine ? Et quoi faire ? »</em><br><strong>Patient :</strong> <em>« Pas trop honnêtement… »</em><br><strong>Préparateur :</strong> <em>« Écoutez, ce que je vous propose : on prend un quart d\'heure ensemble la semaine prochaine. C\'est gratuit, c\'est confidentiel. On revoit les signes qui doivent vous alerter, ce qu\'il faut faire, ce qu\'il faut éviter. Vous repartez rassuré, avec une fiche claire. Ça vous va si je vous fixe un créneau mardi à 10 h ? »</em><br><br>🎯 Thématique mobilisée : <strong>Effets du traitement</strong> (signes hémorragiques + conduite à tenir)<br>✅ Question ciblée révèle le manquement · ✅ Proposition naturelle après le « je sais pas » · ✅ Argument rassurant + créneau précis (pas un vague « quand vous voulez »)'
+                            avatar: '👨',
+                            patient: 'Mr R., 70 ans',
+                            situation: 'Coumadine pour FA depuis 18 mois. Vient acheter du Doliprane après s\'être cogné dans une porte la veille.',
+                            tag: 'EFFETS DU TRAITEMENT',
+                            redFlags: [
+                                'Demande Doliprane après chute → vérifier hématome',
+                                'Patient mentionne « bleu plus gros que d\'habitude »',
+                                'Avoue ne pas connaître les signes d\'alerte sous AVK'
+                            ],
+                            questions: [
+                                'Vous avez vu un bleu apparaître ? Quelque chose d\'inhabituel ?',
+                                'Vous savez à partir de quand un saignement doit vous alerter ?',
+                                'Vous avez votre carte anticoagulant et votre carnet ?'
+                            ],
+                            actions: [
+                                'Refuser tout AINS/aspirine — paracétamol seul autorisé (max 3 g/j)',
+                                'Vérifier au DP qu\'il n\'y a pas eu d\'antibiotique récent ou de nouveau médicament',
+                                'Proposer entretien : « <em>On prend un quart d\'heure ensemble la semaine prochaine. C\'est gratuit, confidentiel. On revoit les signes qui doivent vous alerter, ce qu\'il faut faire. Mardi à 10 h ? </em>»',
+                                'Si hématome volumineux ou saignement actif → orienter MT immédiatement'
+                            ],
+                            takeaway: 'Toute demande post-traumatique chez un patient AVK est une opportunité d\'entretien. Le « je sais pas » du patient est le déclencheur naturel de la proposition.'
                         },
                         {
-                            title: 'Cas B — Patiente avec INR bas inhabituel sur le carnet',
-                            story: '<em>👤 Mme L., 68 ans, Préviscan depuis 5 ans, INR habituel autour de 2,5. Vient renouveler avec un INR à 1,4 noté il y a 4 jours.</em><br><br><strong>Préparateur :</strong> <em>« Madame L., votre dernier INR est à 1,4 — c\'est plus bas que d\'habitude. Quelque chose a changé dans votre quotidien ces dernières semaines ? »</em><br><strong>Patiente :</strong> <em>« J\'ai commencé un régime depuis 2 mois, beaucoup de salade, brocolis, épinards… »</em><br><strong>Préparateur :</strong> <em>« Vous saviez que certains légumes verts peuvent influencer l\'effet de votre Préviscan ? »</em><br><strong>Patiente :</strong> <em>« Non, personne ne m\'a vraiment expliqué ça… »</em><br><strong>Préparateur :</strong> <em>« Écoutez, je vous propose qu\'on prenne 30 minutes ensemble cette semaine. C\'est gratuit, c\'est confidentiel. On fait le tour de tout ce qui peut influencer votre INR : alimentation, voyages, sport, automédication. Vous repartez avec une fiche personnalisée. Et je préviens votre médecin du résultat d\'INR via la messagerie sécurisée pour qu\'il ajuste si besoin. Jeudi à 11 h, ça vous va ? »</em><br><br>🎯 Thématique mobilisée : <strong>Vie quotidienne & alimentation</strong> (vitamine K + interactions globales)<br>✅ Détection proactive via DP/carnet · ✅ Question ouverte sur changements · ✅ Pédagogie courte + proposition + coordination MSS'
+                            avatar: '👩',
+                            patient: 'Mme L., 68 ans',
+                            situation: 'Préviscan depuis 5 ans, INR habituel autour de 2,5. Vient renouveler avec un INR à 1,4 noté il y a 4 jours.',
+                            tag: 'ALIMENTATION',
+                            redFlags: [
+                                'INR à 1,4 = bien en-dessous de la cible (2-3)',
+                                'Régime récent avec légumes verts en grande quantité',
+                                'Aucune éducation antérieure sur la vit K'
+                            ],
+                            questions: [
+                                'Quelque chose a changé dans votre quotidien ces dernières semaines ?',
+                                'Vous saviez que les légumes verts peuvent influencer votre INR ?',
+                                'Avez-vous pris d\'autres compléments, plantes, médicaments ?'
+                            ],
+                            actions: [
+                                'Pédagogie courte sur la vit K : « <em>Pas d\'aliment interdit, mais des apports stables — pas de cure verte ponctuelle</em> »',
+                                'MSS au MT pour signaler l\'INR sous-thérapeutique et discuter d\'un ajustement de dose',
+                                'Proposer entretien : « <em>30 minutes ensemble cette semaine. On fait le tour de l\'alimentation, des voyages, de l\'automédication. Jeudi à 11 h ? </em>»',
+                                'Re-doser INR sous 7 jours pour vérifier le retour en cible'
+                            ],
+                            takeaway: 'Un INR hors cible inhabituel est un déclencheur idéal pour l\'entretien. La détection passe par le carnet ou le DP — d\'où l\'intérêt de regarder systématiquement.'
                         },
                         {
-                            title: 'Cas C — Patient qui ne connaît pas sa cible INR',
-                            story: '<em>👤 Mr B., 75 ans, Coumadine pour FA. Renouvellement de routine, dernier INR à 2,8 il y a 6 semaines.</em><br><br><strong>Préparateur :</strong> <em>« Bonjour Mr B. Vous savez quand est votre prochain contrôle ? »</em><br><strong>Patient :</strong> <em>« Heu, bientôt je crois, je vais regarder dans le carnet. »</em><br><strong>Préparateur :</strong> <em>« Et votre cible d\'INR, vous la connaissez précisément ? »</em><br><strong>Patient :</strong> <em>« Le médecin m\'a dit quelque chose, je crois 2-3, ou peut-être 2,5… je sais plus exactement. »</em><br><strong>Préparateur :</strong> <em>« C\'est important que vous la connaissiez précisément — c\'est ce qui guide votre traitement. Écoutez, je vous propose qu\'on se pose un quart d\'heure ensemble. On regarde votre carnet, votre cible exacte, votre rythme de contrôle, et la conduite à tenir si vous oubliez une prise. C\'est gratuit. Si besoin j\'appelle votre médecin pour confirmer la cible. Vendredi à 14 h ? »</em><br><br>🎯 Thématique mobilisée : <strong>Surveillance biologique (INR)</strong><br>✅ Questions courtes révèlent le manquement · ✅ Pédagogie sur l\'enjeu (« c\'est ce qui guide votre traitement ») · ✅ Proposition concrète + coordination médecin si besoin'
+                            avatar: '👴',
+                            patient: 'Mr B., 75 ans',
+                            situation: 'Coumadine pour FA. Renouvellement de routine, dernier INR à 2,8 il y a 6 semaines.',
+                            tag: 'SURVEILLANCE INR',
+                            redFlags: [
+                                'Patient ne connaît pas précisément sa cible INR',
+                                'Dernier contrôle date de 6 semaines (limite haute)',
+                                'Pas de prochain rendez-vous fixé'
+                            ],
+                            questions: [
+                                'Vous savez quand est votre prochain contrôle ?',
+                                'Et votre cible d\'INR, vous la connaissez précisément ?',
+                                'Vous savez quoi faire en cas d\'oubli de prise ?'
+                            ],
+                            actions: [
+                                'Rappeler la règle 8h pour oubli (ANSM) : ≤ 8h = prendre / > 8h = sauter',
+                                'Vérifier dans le carnet la cible exacte et la fréquence prescrite',
+                                'Proposer entretien : « <em>Un quart d\'heure ensemble pour revoir votre cible, le rythme de contrôle, et la conduite en cas d\'oubli. Vendredi à 14 h ? </em>»',
+                                'Si cible non documentée → MSS au MT pour confirmation officielle'
+                            ],
+                            takeaway: 'Un patient qui ne connaît pas sa cible INR est un patient à risque. Pédagogie : « <em>C\'est ce qui guide tout votre traitement</em> ». Approche valorisante, pas culpabilisante.'
                         }
                     ]
                 },
                 {
                     id: 'objections-patient',
-                    type: 'callouts',
-                    title: '5 objections fréquentes au comptoir & comment y répondre',
-                    callouts: [
-                        { level: 'warn', title: '« J\'ai peur de saigner avec ce médicament… »', text: '« Le risque existe, mais il est très bien maîtrisé si on respecte 3 règles : surveillance INR régulière, pas d\'automédication, signalement de tout saignement inhabituel. Le bénéfice (éviter un AVC, une embolie) est largement supérieur. Vous avez votre carnet et votre carte AVK ? »' },
-                        { level: 'danger', title: '« Mon voisin prend la même chose, on a échangé sur les doses… »', text: '« Surtout pas. La dose est strictement personnelle, calculée selon VOTRE INR. Une dose qui convient à votre voisin peut vous mettre en danger. Ne comparez jamais. Si doute, on en parle ou vous appelez votre médecin. »' },
-                        { level: 'info', title: '« Je n\'ose plus faire de sport, j\'ai trop peur… »', text: '« Le sport est même recommandé. Marche, natation, vélo, yoga, golf, tennis — aucun problème. Évitez seulement les sports de contact (rugby, boxe) et les sports avec risque de chute (ski, équitation). Une activité régulière modérée vous fait du bien. »' },
-                        { level: 'warn', title: '« Le médecin a changé ma dose, je ne comprends pas pourquoi… »', text: '« Votre dose s\'adapte à votre INR comme la dose d\'insuline s\'adapte à la glycémie. Votre médecin ajuste pour vous garder dans votre zone cible. Notez dans le carnet et suivez les contrôles prescrits. »' },
-                        { level: 'info', title: '« L\'entretien pharmaceutique, ça sert à quoi ? J\'ai déjà mon médecin… »', text: '« L\'entretien complète le suivi médical. Votre médecin gère votre traitement, nous nous occupons des interactions et du quotidien : alimentation, voyages, automédication, oublis. C\'est gratuit, confidentiel, 30 minutes. Beaucoup y trouvent des infos qu\'ils n\'avaient jamais eues. On en programme un ? »' }
-                    ]
+                    type: 'advice-why-avk',
+                    title: '5 objections fréquentes au comptoir — pourquoi & comment y répondre',
+                    objections: [
+                        { objection: 'J\'ai peur de saigner avec ce médicament…', why: 'Crainte légitime : le risque hémorragique existe. Mais le bénéfice (éviter AVC ischémique, embolie pulmonaire, thrombose veineuse) est largement supérieur si la surveillance est régulière.', response: 'Le risque existe, mais il est très bien maîtrisé si on respecte 3 règles : surveillance INR régulière, pas d\'automédication, signalement de tout saignement inhabituel. Vous avez votre carnet et votre carte AVK ?' },
+                        { objection: 'Mon voisin prend la même chose, on a échangé sur les doses…', why: 'Méconnaissance fondamentale : la dose AVK est strictement individuelle, ajustée à l\'INR du patient. Échanger des doses peut tuer.', response: 'Surtout pas. La dose est strictement personnelle, calculée selon VOTRE INR. Une dose qui convient à votre voisin peut vous mettre en danger. Ne comparez jamais. Si doute, on en parle ou vous appelez votre médecin.' },
+                        { objection: 'Je n\'ose plus faire de sport, j\'ai trop peur…', why: 'Confusion entre sports recommandés (endurance, basse intensité) et sports à risque (contact, chute). L\'inactivité aggrave le risque thromboembolique.', response: 'Le sport est même recommandé. Marche, natation, vélo, yoga, golf, tennis — aucun problème. Évitez seulement les sports de contact (rugby, boxe) et les sports avec risque de chute (ski, équitation). Une activité régulière modérée vous fait du bien.' },
+                        { objection: 'Le médecin a changé ma dose, je ne comprends pas pourquoi…', why: 'Manque de pédagogie initiale : le patient n\'a pas compris que la dose s\'ajuste à l\'INR. Risque de mauvaise observance ou d\'auto-ajustement dangereux.', response: 'Votre dose s\'adapte à votre INR comme la dose d\'insuline s\'adapte à la glycémie. Votre médecin ajuste pour vous garder dans votre zone cible. Notez dans le carnet et suivez les contrôles prescrits.' },
+                        { objection: 'L\'entretien pharmaceutique, ça sert à quoi ? J\'ai déjà mon médecin…', why: 'Méconnaissance de la valeur ajoutée pharmaceutique : interactions médicamenteuses, alimentation, automédication, conduite quotidienne — autant de sujets que le médecin n\'a pas le temps d\'aborder en consultation.', response: 'L\'entretien complète le suivi médical. Votre médecin gère votre traitement, nous nous occupons des interactions et du quotidien : alimentation, voyages, automédication, oublis. C\'est gratuit, confidentiel, 30 minutes. On en programme un ?' }
+                    ],
+                    note: '<strong>💡 Posture comptoir :</strong> chaque objection révèle un manque d\'information. La réponse n\'est pas une « contre-argumentation » mais une pédagogie courte qui valorise le patient.'
                 },
                 {
                     id: 'facturation',
@@ -1571,45 +1883,49 @@
                 },
                 {
                     id: 'checklist-comptoir',
-                    type: 'callouts-visual',
-                    title: 'Check-list comptoir AVK — votre mémo de poche (5+5)',
-                    callouts: [
+                    type: 'memo-card-avk',
+                    title: 'Mémo-fiche comptoir AVK — votre récapitulatif (5+5+5+5)',
+                    sections: [
                         {
-                            level: 'info',
-                            title: '❓ 5 questions à poser',
+                            icon: '❓',
+                            title: '5 questions à poser',
+                            color: '#0984e3',
                             items: [
-                                '« Quand est votre dernier INR et quelle valeur ? »',
-                                '« Connaissez-vous votre zone cible ? »',
-                                '« Avez-vous votre carnet et votre carte AVK ? »',
-                                '« Avez-vous pris ou changé d\'autres médicaments / plantes / compléments ? »',
-                                '« Saignements inhabituels, bleus, fatigue ? »'
+                                'Quand est votre dernier INR et quelle valeur ?',
+                                'Connaissez-vous votre zone cible ?',
+                                'Avez-vous votre carnet et votre carte AVK ?',
+                                'Avez-vous pris ou changé d\'autres médicaments, plantes, compléments ?',
+                                'Saignements inhabituels, bleus, fatigue ?'
                             ]
                         },
                         {
-                            level: 'info',
-                            title: '✅ 5 vérifications réflexes',
+                            icon: '✅',
+                            title: '5 vérifications réflexes',
+                            color: '#00b894',
                             items: [
                                 'Pas d\'AINS, aspirine, miconazole, millepertuis dans DP/commande',
                                 'Pas d\'antibiotique récent sans contrôle INR programmé',
-                                'INR dans la cible sur le dernier carnet (sinon : MSS au médecin)',
+                                'INR dans la cible sur le dernier carnet (sinon MSS au médecin)',
                                 'Carnet à jour (prises notées, INR notés)',
                                 'Prochain RDV entretien programmé ou proposé'
                             ]
                         },
                         {
-                            level: 'danger',
-                            title: '🚨 Mémo rouge — appel 15',
+                            icon: '🚨',
+                            title: '5 alertes appel 15',
+                            color: '#d63031',
                             items: [
-                                'Essoufflement brutal + douleur thoracique → embolie pulmonaire',
+                                'Essoufflement brutal + douleur thoracique → EP',
                                 'Bouche déformée + faiblesse hémicorporelle → AVC',
                                 'Jambe gonflée + douleur unilatérale → phlébite',
-                                'Vomissements sang ou « marc de café », selles noires → hémorragie digestive',
-                                'Coupure ne stoppant pas après 10 min compression → urgences'
+                                'Vomissements sang / selles noires → hémorragie digestive',
+                                'Coupure non stoppée après 10 min de compression → urgences'
                             ]
                         },
                         {
-                            level: 'warn',
-                            title: '❌ Interactions à intercepter',
+                            icon: '❌',
+                            title: '5 interactions à intercepter',
+                            color: '#f39c12',
                             items: [
                                 'Aspirine (toutes formes, même faible dose)',
                                 'Miconazole voie générale ou Daktarin gel buccal',
@@ -1618,7 +1934,8 @@
                                 'ATB (cotrimoxazole, métronidazole, fluconazole, érythromycine, ciprofloxacine) → INR à 3-4 j'
                             ]
                         }
-                    ]
+                    ],
+                    note: '📋 Imprimable — à garder sous le comptoir comme aide-mémoire pendant les premiers entretiens AVK.'
                 },
                 {
                     id: 'synthese',
@@ -1931,6 +2248,407 @@
                                     `).join('')}
                                 </div>
                             </div>
+                        `;
+                        break;
+
+                    case 'mechanism-avk':
+                        content.innerHTML = `
+                            <h2>${slide.title}</h2>
+                            <div class="avk-mechanism-grid">
+                                <div class="avk-mechanism-svg">
+                                    <h3 style="margin-bottom: 1rem; color: #2d3436; font-size: 1.2rem;">🧬 Animation moléculaire</h3>
+                                    <svg viewBox="0 0 360 340" style="width: 100%; max-width: 380px;">
+                                        <defs>
+                                            <linearGradient id="hepatGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                                <stop offset="0%" stop-color="#feca57" stop-opacity="0.4"/>
+                                                <stop offset="50%" stop-color="#fdcb6e" stop-opacity="0.7"/>
+                                                <stop offset="100%" stop-color="#feca57" stop-opacity="0.4"/>
+                                            </linearGradient>
+                                            <radialGradient id="avkMol">
+                                                <stop offset="0%" stop-color="#ff7675"/>
+                                                <stop offset="100%" stop-color="#d63031"/>
+                                            </radialGradient>
+                                            <radialGradient id="vitKactive">
+                                                <stop offset="0%" stop-color="#55efc4"/>
+                                                <stop offset="100%" stop-color="#00b894"/>
+                                            </radialGradient>
+                                            <radialGradient id="factorGrad">
+                                                <stop offset="0%" stop-color="#74b9ff"/>
+                                                <stop offset="100%" stop-color="#0984e3"/>
+                                            </radialGradient>
+                                        </defs>
+                                        <text x="20" y="18" fill="#2d3436" font-size="11" font-weight="700">HÉPATOCYTE — ZONE D'ACTION DES AVK</text>
+                                        <rect x="20" y="25" width="320" height="20" rx="4" fill="url(#hepatGrad)"/>
+                                        <text x="180" y="40" text-anchor="middle" fill="#5f6368" font-size="9">membrane hépatocytaire</text>
+                                        <!-- VKORC1 enzyme - rectangle au centre -->
+                                        <g transform="translate(180, 130)">
+                                            <rect x="-30" y="-12" width="60" height="24" rx="6" fill="#00b894" stroke="#00856a" stroke-width="2">
+                                                <animate attributeName="fill" values="#00b894;#00b894;#5f6368;#5f6368" keyTimes="0;0.5;0.6;1" dur="9s" repeatCount="indefinite"/>
+                                                <animate attributeName="opacity" values="1;1;0.5;0.5" keyTimes="0;0.5;0.6;1" dur="9s" repeatCount="indefinite"/>
+                                            </rect>
+                                            <text x="0" y="4" text-anchor="middle" fill="white" font-size="11" font-weight="800">VKORC1</text>
+                                            <text x="0" y="32" text-anchor="middle" fill="#5f6368" font-size="9">enzyme cible</text>
+                                        </g>
+                                        <!-- Molécule AVK qui descend et bloque VKORC1 -->
+                                        <g>
+                                            <circle r="11" fill="url(#avkMol)" filter="drop-shadow(0 0 6px #d63031)">
+                                                <animateMotion dur="9s" repeatCount="indefinite" keyTimes="0;0.1;0.5;0.7;1" keyPoints="0;0.05;0.85;1;1" path="M 60 -10 L 60 50 L 165 130 L 180 130 L 180 130"/>
+                                                <animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;0.1;0.5;0.85;1" dur="9s" repeatCount="indefinite"/>
+                                            </circle>
+                                            <text x="60" y="-2" text-anchor="middle" fill="#d63031" font-size="10" font-weight="700">
+                                                <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.2;0.3;1" dur="9s" repeatCount="indefinite"/>
+                                                AVK
+                                            </text>
+                                        </g>
+                                        <!-- Vitamine K active (verte) qui s'estompe -->
+                                        <g>
+                                            <circle cx="280" cy="130" r="9" fill="url(#vitKactive)">
+                                                <animate attributeName="opacity" values="1;1;0.2;0.2" keyTimes="0;0.55;0.7;1" dur="9s" repeatCount="indefinite"/>
+                                            </circle>
+                                            <text x="280" y="115" text-anchor="middle" fill="#00856a" font-size="9" font-weight="700">vit K active</text>
+                                        </g>
+                                        <!-- Facteurs II, VII, IX, X qui s'estompent -->
+                                        <text x="180" y="200" text-anchor="middle" fill="#0984e3" font-size="11" font-weight="700">FACTEURS DE COAGULATION VIT K-DÉPENDANTS</text>
+                                        <g>
+                                            <g>
+                                                <circle cx="80" cy="240" r="20" fill="url(#factorGrad)" filter="drop-shadow(0 0 4px #0984e3)">
+                                                    <animate attributeName="opacity" values="1;1;0.25;0.25" keyTimes="0;0.6;0.9;1" dur="9s" repeatCount="indefinite"/>
+                                                </circle>
+                                                <text x="80" y="245" text-anchor="middle" fill="white" font-size="13" font-weight="900">II</text>
+                                            </g>
+                                            <g>
+                                                <circle cx="148" cy="240" r="20" fill="url(#factorGrad)" filter="drop-shadow(0 0 4px #0984e3)">
+                                                    <animate attributeName="opacity" values="1;1;0.25;0.25" keyTimes="0;0.62;0.92;1" dur="9s" repeatCount="indefinite"/>
+                                                </circle>
+                                                <text x="148" y="245" text-anchor="middle" fill="white" font-size="13" font-weight="900">VII</text>
+                                            </g>
+                                            <g>
+                                                <circle cx="216" cy="240" r="20" fill="url(#factorGrad)" filter="drop-shadow(0 0 4px #0984e3)">
+                                                    <animate attributeName="opacity" values="1;1;0.25;0.25" keyTimes="0;0.64;0.94;1" dur="9s" repeatCount="indefinite"/>
+                                                </circle>
+                                                <text x="216" y="245" text-anchor="middle" fill="white" font-size="13" font-weight="900">IX</text>
+                                            </g>
+                                            <g>
+                                                <circle cx="284" cy="240" r="20" fill="url(#factorGrad)" filter="drop-shadow(0 0 4px #0984e3)">
+                                                    <animate attributeName="opacity" values="1;1;0.25;0.25" keyTimes="0;0.66;0.96;1" dur="9s" repeatCount="indefinite"/>
+                                                </circle>
+                                                <text x="284" y="245" text-anchor="middle" fill="white" font-size="13" font-weight="900">X</text>
+                                            </g>
+                                        </g>
+                                        <text x="180" y="285" text-anchor="middle" fill="#d63031" font-size="11" font-weight="700">
+                                            <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.7;0.85;1" dur="9s" repeatCount="indefinite"/>
+                                            ↓ ANTICOAGULATION
+                                        </text>
+                                        <text x="180" y="310" text-anchor="middle" fill="#5f6368" font-size="9">+ protéines C et S également affectées</text>
+                                    </svg>
+                                    <p style="text-align: center; font-size: 0.85rem; color: #5f6368; margin-top: 0.5rem; font-style: italic;">Cycle complet en 9 secondes</p>
+                                </div>
+                                <div class="card" style="margin-bottom: 0; padding: 1.5rem;">
+                                    <h3 style="margin-bottom: 1rem; color: #2d3436; font-size: 1.2rem;">🎯 Les 4 étapes</h3>
+                                    ${slide.steps.map((step, i) => `
+                                        <div style="display: flex; gap: 0.8rem; margin-bottom: 0.8rem; padding: 0.7rem; background: rgba(255,107,107,0.05); border-radius: 12px; border-left: 3px solid #ff6b6b;">
+                                            <div style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #ff6b6b, #ee5a24); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; flex-shrink: 0; font-size: 0.85rem;">${i + 1}</div>
+                                            <div style="flex: 1;">
+                                                <strong style="color: #2d3436; display: block; margin-bottom: 0.2rem;">${step.title}</strong>
+                                                <span style="font-size: 0.85rem; color: #5f6368; line-height: 1.4;">${step.text}</span>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                    <div class="conseil-box" style="margin-top: 1rem;">
+                                        <h4 style="color: #00856a;">⚡ Pourquoi 3 à 5 jours pour effet plein ?</h4>
+                                        <p>${slide.delayExplanation}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        break;
+
+                    case 'cascade-coag':
+                        content.innerHTML = `
+                            <h2>${slide.title}</h2>
+                            <div class="avk-mechanism-grid">
+                                <div class="avk-mechanism-svg">
+                                    <h3 style="margin-bottom: 0.8rem; color: #2d3436; font-size: 1.1rem;">🩸 Cascade de coagulation</h3>
+                                    <svg viewBox="0 0 360 420" style="width: 100%; max-width: 380px;">
+                                        <defs>
+                                            <radialGradient id="factorBlue">
+                                                <stop offset="0%" stop-color="#74b9ff"/>
+                                                <stop offset="100%" stop-color="#0984e3"/>
+                                            </radialGradient>
+                                            <radialGradient id="factorVitK">
+                                                <stop offset="0%" stop-color="#fdcb6e"/>
+                                                <stop offset="100%" stop-color="#e17055"/>
+                                            </radialGradient>
+                                            <radialGradient id="fibrine">
+                                                <stop offset="0%" stop-color="#fab1a0"/>
+                                                <stop offset="100%" stop-color="#d63031"/>
+                                            </radialGradient>
+                                        </defs>
+                                        <!-- Voie intrinsèque (gauche) -->
+                                        <text x="80" y="20" text-anchor="middle" fill="#0984e3" font-size="10" font-weight="700">VOIE INTRINSÈQUE</text>
+                                        <text x="80" y="36" text-anchor="middle" fill="#5f6368" font-size="9">contact / lésion vasc.</text>
+                                        <circle cx="80" cy="60" r="14" fill="url(#factorBlue)"/>
+                                        <text x="80" y="64" text-anchor="middle" fill="white" font-size="10" font-weight="800">XII</text>
+                                        <line x1="80" y1="74" x2="80" y2="91" stroke="#0984e3" stroke-width="2" marker-end="url(#arrow)"/>
+                                        <circle cx="80" cy="105" r="14" fill="url(#factorBlue)"/>
+                                        <text x="80" y="109" text-anchor="middle" fill="white" font-size="10" font-weight="800">XI</text>
+                                        <line x1="80" y1="119" x2="80" y2="136" stroke="#0984e3" stroke-width="2"/>
+                                        <circle cx="80" cy="150" r="14" fill="url(#factorVitK)" filter="drop-shadow(0 0 5px #e17055)"/>
+                                        <text x="80" y="154" text-anchor="middle" fill="white" font-size="10" font-weight="800">IX</text>
+                                        <text x="40" y="155" fill="#d63031" font-size="9" font-weight="700">⛔AVK</text>
+                                        <!-- Voie extrinsèque (droite) -->
+                                        <text x="280" y="20" text-anchor="middle" fill="#0984e3" font-size="10" font-weight="700">VOIE EXTRINSÈQUE</text>
+                                        <text x="280" y="36" text-anchor="middle" fill="#5f6368" font-size="9">facteur tissulaire</text>
+                                        <rect x="262" y="55" width="36" height="20" rx="4" fill="#fdcb6e"/>
+                                        <text x="280" y="69" text-anchor="middle" fill="#2d3436" font-size="9" font-weight="700">FT</text>
+                                        <line x1="280" y1="80" x2="280" y2="136" stroke="#0984e3" stroke-width="2"/>
+                                        <circle cx="280" cy="150" r="14" fill="url(#factorVitK)" filter="drop-shadow(0 0 5px #e17055)"/>
+                                        <text x="280" y="154" text-anchor="middle" fill="white" font-size="10" font-weight="800">VII</text>
+                                        <text x="305" y="155" fill="#d63031" font-size="9" font-weight="700">⛔AVK</text>
+                                        <!-- Convergence vers facteur X -->
+                                        <line x1="80" y1="164" x2="170" y2="200" stroke="#0984e3" stroke-width="2"/>
+                                        <line x1="280" y1="164" x2="190" y2="200" stroke="#0984e3" stroke-width="2"/>
+                                        <text x="180" y="195" text-anchor="middle" fill="#0984e3" font-size="10" font-weight="700">VOIE COMMUNE</text>
+                                        <circle cx="180" cy="225" r="20" fill="url(#factorVitK)" filter="drop-shadow(0 0 8px #e17055)"/>
+                                        <text x="180" y="230" text-anchor="middle" fill="white" font-size="13" font-weight="900">X</text>
+                                        <text x="220" y="230" fill="#d63031" font-size="10" font-weight="700">⛔AVK · AOD · héparine</text>
+                                        <line x1="180" y1="245" x2="180" y2="270" stroke="#0984e3" stroke-width="2"/>
+                                        <circle cx="180" cy="290" r="20" fill="url(#factorVitK)" filter="drop-shadow(0 0 8px #e17055)"/>
+                                        <text x="180" y="295" text-anchor="middle" fill="white" font-size="13" font-weight="900">II</text>
+                                        <text x="220" y="295" fill="#d63031" font-size="10" font-weight="700">⛔AVK · dabigatran · héparine</text>
+                                        <text x="100" y="295" text-anchor="end" fill="#5f6368" font-size="9">prothrombine</text>
+                                        <line x1="180" y1="310" x2="180" y2="345" stroke="#0984e3" stroke-width="3"/>
+                                        <text x="195" y="330" fill="#0984e3" font-size="9" font-style="italic">→ thrombine</text>
+                                        <!-- Fibrine -->
+                                        <ellipse cx="180" cy="370" rx="60" ry="18" fill="url(#fibrine)" filter="drop-shadow(0 0 8px #d63031)">
+                                            <animate attributeName="rx" values="60;65;60" dur="2s" repeatCount="indefinite"/>
+                                        </ellipse>
+                                        <text x="180" y="375" text-anchor="middle" fill="white" font-size="12" font-weight="800">CAILLOT (fibrine)</text>
+                                        <text x="180" y="405" text-anchor="middle" fill="#5f6368" font-size="9" font-style="italic">Tous les anticoagulants visent à empêcher cette étape finale</text>
+                                    </svg>
+                                </div>
+                                <div class="card" style="margin-bottom: 0; padding: 1.5rem;">
+                                    <h3 style="margin-bottom: 1rem; color: #2d3436; font-size: 1.2rem;">🎯 Cibles thérapeutiques par classe</h3>
+                                    ${slide.targets.map(t => `
+                                        <div style="background: ${t.bg}; padding: 0.9rem 1rem; border-radius: 12px; margin-bottom: 0.7rem; border-left: 4px solid ${t.color};">
+                                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.2rem;">
+                                                <strong style="color: ${t.color}; font-size: 0.95rem;">${t.classe}</strong>
+                                                <span style="font-size: 0.75rem; color: #5f6368; background: white; padding: 2px 8px; border-radius: 8px;">cible: ${t.cible}</span>
+                                            </div>
+                                            <span style="font-size: 0.85rem; color: #2d3436; line-height: 1.4;">${t.action}</span>
+                                        </div>
+                                    `).join('')}
+                                    <div class="conseil-box" style="margin-top: 1rem;">
+                                        <h4 style="color: #00856a;">💡 Pour le comptoir</h4>
+                                        <p>${slide.tip}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        break;
+
+                    case 'pharmaco-bars':
+                        content.innerHTML = `
+                            <h2>${slide.title}</h2>
+                            <div class="card">
+                                <p style="text-align: center; opacity: 0.8; margin-bottom: 1.5rem;">${slide.intro}</p>
+                                ${slide.molecules.map((m, i) => `
+                                    <div style="margin-bottom: 1.4rem;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+                                            <strong style="font-size: 1rem; color: #2d3436;">${m.name}</strong>
+                                            <span style="font-size: 0.85rem; color: #5f6368; background: rgba(254, 202, 87, 0.15); padding: 4px 12px; border-radius: 12px;">demi-vie : <strong>${m.halfLife}</strong></span>
+                                        </div>
+                                        <div style="position: relative; height: 28px; background: rgba(0,0,0,0.05); border-radius: 14px; overflow: hidden;">
+                                            <div style="position: absolute; top: 0; left: 0; width: ${m.barWidth}; height: 100%; background: linear-gradient(90deg, ${m.color1}, ${m.color2}); display: flex; align-items: center; padding-left: 12px; box-shadow: 0 2px 8px ${m.color2}66;">
+                                                <span style="color: white; font-size: 0.8rem; font-weight: 700;">${m.label}</span>
+                                            </div>
+                                        </div>
+                                        <p style="font-size: 0.85rem; color: #5f6368; margin-top: 0.3rem; line-height: 1.4;">${m.note}</p>
+                                    </div>
+                                `).join('')}
+                                <div class="conseil-box" style="margin-top: 1rem;">
+                                    <h4 style="color: #00856a;">⚡ Conséquence pratique</h4>
+                                    <p>${slide.tip}</p>
+                                </div>
+                            </div>
+                        `;
+                        break;
+
+                    case 'target-radial-avk':
+                        content.innerHTML = `
+                            <h2>${slide.title}</h2>
+                            <div class="avk-mechanism-grid">
+                                <div class="avk-mechanism-svg">
+                                    <svg viewBox="0 0 400 400" style="width: 100%; max-width: 400px;">
+                                        <defs>
+                                            <radialGradient id="avkCenterGrad">
+                                                <stop offset="0%" stop-color="#ff7675"/>
+                                                <stop offset="100%" stop-color="#d63031"/>
+                                            </radialGradient>
+                                            ${slide.drugs.map((d, i) => `
+                                                <radialGradient id="drugGrad${i}">
+                                                    <stop offset="0%" stop-color="${d.color}" stop-opacity="1"/>
+                                                    <stop offset="100%" stop-color="${d.color}" stop-opacity="0.7"/>
+                                                </radialGradient>
+                                            `).join('')}
+                                        </defs>
+                                        ${slide.drugs.map((d, i) => {
+                                            const angle = (i * (360 / slide.drugs.length) - 90) * Math.PI / 180;
+                                            const x = 200 + 145 * Math.cos(angle);
+                                            const y = 200 + 145 * Math.sin(angle);
+                                            return `<line x1="200" y1="200" x2="${x}" y2="${y}" stroke="${d.color}" stroke-width="2" stroke-opacity="0.45" stroke-dasharray="6,4"><animate attributeName="stroke-dashoffset" from="0" to="20" dur="2s" repeatCount="indefinite"/></line>`;
+                                        }).join('')}
+                                        <circle cx="200" cy="200" r="58" fill="url(#avkCenterGrad)" filter="drop-shadow(0 0 18px rgba(214,48,49,0.6))">
+                                            <animate attributeName="r" values="56;60;56" dur="3s" repeatCount="indefinite"/>
+                                        </circle>
+                                        <text x="200" y="195" text-anchor="middle" fill="white" font-size="14" font-weight="800">AVK</text>
+                                        <text x="200" y="212" text-anchor="middle" fill="white" font-size="10">INR ↑↓ ?</text>
+                                        ${slide.drugs.map((d, i) => {
+                                            const angle = (i * (360 / slide.drugs.length) - 90) * Math.PI / 180;
+                                            const x = 200 + 145 * Math.cos(angle);
+                                            const y = 200 + 145 * Math.sin(angle);
+                                            return `
+                                                <circle cx="${x}" cy="${y}" r="38" fill="url(#drugGrad${i})" filter="drop-shadow(0 4px 10px ${d.color}88)">
+                                                    <animate attributeName="r" values="36;40;36" dur="${3 + i * 0.3}s" repeatCount="indefinite"/>
+                                                </circle>
+                                                <text x="${x}" y="${y - 2}" text-anchor="middle" fill="white" font-size="10" font-weight="700">${d.name}</text>
+                                                <text x="${x}" y="${y + 12}" text-anchor="middle" fill="white" font-size="9">${d.effect}</text>
+                                            `;
+                                        }).join('')}
+                                    </svg>
+                                </div>
+                                <div class="card" style="margin-bottom: 0; padding: 1.5rem;">
+                                    <h3 style="margin-bottom: 1rem; color: #2d3436; font-size: 1.1rem;">📋 Niveaux ANSM</h3>
+                                    ${slide.drugs.map(d => `
+                                        <div style="background: ${d.color}1A; padding: 0.7rem 0.9rem; border-radius: 10px; margin-bottom: 0.5rem; border-left: 3px solid ${d.color};">
+                                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.2rem;">
+                                                <strong style="color: ${d.color}; font-size: 0.9rem;">${d.name}</strong>
+                                                <span style="font-size: 0.75rem; font-weight: 700; padding: 2px 8px; border-radius: 8px; background: ${d.color}; color: white;">${d.level}</span>
+                                            </div>
+                                            <span style="font-size: 0.8rem; line-height: 1.4; color: #2d3436;">${d.action}</span>
+                                        </div>
+                                    `).join('')}
+                                    <div class="conseil-box" style="margin-top: 0.8rem;">
+                                        <p>${slide.tip}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        break;
+
+                    case 'crisis-protocol-avk':
+                        content.innerHTML = `
+                            <h2>${slide.title}</h2>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                                <div class="card" style="margin-bottom: 0; border-left: 5px solid #fdcb6e; padding: 1.3rem;">
+                                    <h3 style="color: #f39c12; margin-bottom: 0.6rem; font-size: 1.1rem;">🩹 Saignement mineur</h3>
+                                    <p style="font-size: 0.9rem; line-height: 1.5; color: #2d3436;">${slide.minor}</p>
+                                </div>
+                                <div class="card" style="margin-bottom: 0; border-left: 5px solid #d63031; padding: 1.3rem;">
+                                    <h3 style="color: #c0392b; margin-bottom: 0.6rem; font-size: 1.1rem;">🚨 Saignement majeur</h3>
+                                    <p style="font-size: 0.9rem; line-height: 1.5; color: #2d3436;">${slide.major}</p>
+                                </div>
+                            </div>
+                            <div class="callout callout-danger" style="margin-bottom: 1rem;">
+                                <h3 style="display: flex; align-items: center; gap: 0.6rem;"><span style="font-size: 1.5rem;">🚑</span> Signes de gravité — appel SAMU 15 IMMÉDIAT</h3>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.5rem; margin-top: 0.8rem;">
+                                    ${slide.gravitySigns.map(s => `<div style="background: rgba(255,255,255,0.6); padding: 0.5rem 0.8rem; border-radius: 10px; font-size: 0.85rem; color: #c0392b; font-weight: 600;">⚠️ ${s}</div>`).join('')}
+                                </div>
+                            </div>
+                            <div class="conseil-box">
+                                <h4>📋 Coordination officinale</h4>
+                                <p>${slide.coordination}</p>
+                            </div>
+                            ${slide.source ? `<p style="margin-top: 0.8rem; font-size: 0.8rem; color: #5f6368; font-style: italic; text-align: center;">${slide.source}</p>` : ''}
+                        `;
+                        break;
+
+                    case 'case-detailed-avk':
+                        content.innerHTML = `
+                            <h2>${slide.title}</h2>
+                            ${slide.cases.map(c => `
+                                <div class="case-detailed-card">
+                                    <div class="case-detailed-header">
+                                        <div class="case-avatar">${c.avatar}</div>
+                                        <div style="flex: 1;">
+                                            <h3 style="margin: 0; color: #2d3436; font-size: 1.1rem;">${c.patient}</h3>
+                                            <p style="margin: 0.3rem 0 0 0; font-size: 0.9rem; color: #5f6368; line-height: 1.5;">${c.situation}</p>
+                                        </div>
+                                        <div class="case-tag">${c.tag}</div>
+                                    </div>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem;">
+                                        <div class="case-section flags">
+                                            <div class="case-section-title" style="color: #f39c12;">🚩 Ce qui alerte</div>
+                                            <ul style="margin: 0; padding-left: 1rem; font-size: 0.85rem;">
+                                                ${c.redFlags.map(f => `<li style="margin-bottom: 0.3rem;">${f}</li>`).join('')}
+                                            </ul>
+                                        </div>
+                                        <div class="case-section questions">
+                                            <div class="case-section-title" style="color: #2980b9;">💬 Questions</div>
+                                            <ul style="margin: 0; padding-left: 1rem; font-size: 0.85rem;">
+                                                ${c.questions.map(q => `<li style="margin-bottom: 0.3rem; font-style: italic;">« ${q} »</li>`).join('')}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="case-section actions" style="margin-top: 0.8rem;">
+                                        <div class="case-section-title" style="color: #00856a;">✅ Conduite à tenir</div>
+                                        <ol style="margin: 0; padding-left: 1.2rem; font-size: 0.85rem;">
+                                            ${c.actions.map(a => `<li style="margin-bottom: 0.3rem;">${a}</li>`).join('')}
+                                        </ol>
+                                    </div>
+                                    <div class="case-section takeaway">
+                                        <div class="case-section-title" style="color: #00856a;">🎓 À retenir</div>
+                                        <p style="margin: 0; font-size: 0.9rem; line-height: 1.5;">${c.takeaway}</p>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        `;
+                        break;
+
+                    case 'advice-why-avk':
+                        content.innerHTML = `
+                            <h2>${slide.title}</h2>
+                            <div class="card">
+                                <table class="advice-why-table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 28%;">Objection patient</th>
+                                            <th style="width: 32%;">Pourquoi cette inquiétude</th>
+                                            <th style="width: 40%;">Comment formuler la réponse</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${slide.objections.map(o => `
+                                            <tr>
+                                                <td>« ${o.objection} »</td>
+                                                <td style="font-size: 0.9rem; color: #5f6368; font-style: normal !important;">${o.why}</td>
+                                                <td>« ${o.response} »</td>
+                                            </tr>
+                                        `).join('')}
+                                    </tbody>
+                                </table>
+                                ${slide.note ? `<div class="conseil-box" style="margin-top: 1.2rem;"><p>${slide.note}</p></div>` : ''}
+                            </div>
+                        `;
+                        break;
+
+                    case 'memo-card-avk':
+                        content.innerHTML = `
+                            <h2>${slide.title}</h2>
+                            <div class="memo-grid">
+                                ${slide.sections.map(sec => `
+                                    <div class="memo-section" style="border-top: 4px solid ${sec.color};">
+                                        <div class="memo-section-header">
+                                            <span style="font-size: 1.4rem;">${sec.icon}</span>
+                                            <h3 style="margin: 0; color: ${sec.color}; font-size: 1rem;">${sec.title}</h3>
+                                        </div>
+                                        <ul>
+                                            ${sec.items.map(it => `<li style="color: #2d3436;"><span style="color: ${sec.color}; position: absolute; left: 0;">→</span>${it}</li>`).join('')}
+                                        </ul>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            ${slide.note ? `<div class="conseil-box" style="margin-top: 1rem;"><p>${slide.note}</p></div>` : ''}
                         `;
                         break;
                 }
