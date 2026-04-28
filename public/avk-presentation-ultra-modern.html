@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Accompagnement AVK - Présentation Ultra Moderne</title>
     <style>
         * {
@@ -16,17 +16,21 @@
             background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
             overflow: hidden;
             height: 100vh;
+            height: 100dvh;
             position: relative;
+            -webkit-text-size-adjust: 100%;
         }
 
         .container {
             width: 100vw;
             height: 100vh;
+            height: 100dvh;
             display: flex;
             flex-direction: column;
             background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
             position: relative;
             overflow: hidden;
+            min-height: 0;
         }
 
         /* Animated background particles */
@@ -124,7 +128,11 @@
         .slide-content {
             flex: 1;
             padding: 2.5rem;
+            padding-left: max(2.5rem, env(safe-area-inset-left));
+            padding-right: max(2.5rem, env(safe-area-inset-right));
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: contain;
             display: flex;
             flex-direction: column;
             animation: slideIn 0.8s cubic-bezier(0.23, 1, 0.32, 1);
@@ -132,6 +140,7 @@
             z-index: 10;
             scrollbar-width: thin;
             scrollbar-color: rgba(255, 107, 107, 0.2) transparent;
+            min-height: 0;
         }
 
         .slide-content::-webkit-scrollbar {
@@ -903,8 +912,11 @@
 
         /* Footer */
         .footer {
-            height: 90px;
+            min-height: 90px;
             padding: 0 2.5rem;
+            padding-bottom: env(safe-area-inset-bottom);
+            padding-left: max(2.5rem, env(safe-area-inset-left));
+            padding-right: max(2.5rem, env(safe-area-inset-right));
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -914,6 +926,7 @@
             box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.05);
             position: relative;
             z-index: 20;
+            flex-shrink: 0;
         }
 
         .footer-left {
@@ -993,17 +1006,175 @@
             text-transform: uppercase;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            h1 { font-size: 2.8rem; }
-            h2 { font-size: 2.2rem; }
-            .slide-content { padding: 2rem 1.5rem; }
-            .info-grid { grid-template-columns: 1fr; }
-            .messages-grid { grid-template-columns: 1fr; }
-            .pie-chart { width: 280px; height: 280px; }
+        /* Responsive — système 4 breakpoints */
+        @media (max-width: 1199px) {
+            .slide-content { padding: 2rem; }
+            h1 { font-size: 3.6rem; }
+            h2 { font-size: 2.4rem; }
+            .icon-container { width: 130px; height: 130px; }
+            .info-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+            .summary-points { max-width: 100%; }
+            .footer { padding: 0 2rem; }
+        }
+
+        @media (max-width: 1023px) {
+            .slide-content { padding: 1.6rem 1.4rem; }
+            h1 { font-size: 3rem; }
+            h2 { font-size: 2.1rem; margin-bottom: 1.8rem; }
+            .subtitle { font-size: 1.6rem; }
+            .icon-container { width: 110px; height: 110px; margin-bottom: 2rem; border-radius: 30px; }
+            .icon-container svg { width: 60px; height: 60px; }
+            .module-icon { width: 64px; height: 64px; font-size: 2rem; border-radius: 18px; }
+            .module-header { gap: 1rem; margin-bottom: 1.4rem; }
+            .info-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
+            .messages-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; }
+            .info-card, .case-card, .summary-point { padding: 1.6rem; }
+            .step-content { padding: 1.4rem; }
+            .step-content h3 { font-size: 1.2rem; }
+            .pie-chart { width: 300px; height: 300px; }
+            .footer { height: 76px; padding: 0 1.6rem; }
+            .nav-btn { width: 52px; height: 52px; }
+            .nav-btn svg { width: 22px; height: 22px; }
+            th, td { padding: 1rem; font-size: 0.95rem; }
+        }
+
+        @media (max-width: 767px) {
+            .slide-content { padding: 1.2rem 1rem; }
+            h1 { font-size: 2.2rem; line-height: 1.15; }
+            h2 { font-size: 1.6rem; margin-bottom: 1.2rem; }
+            h2::after { width: 60px; height: 4px; bottom: -8px; }
+            .subtitle { font-size: 1.2rem; }
+            .icon-container { width: 88px; height: 88px; margin-bottom: 1.4rem; border-radius: 22px; }
+            .icon-container svg { width: 46px; height: 46px; }
+            .module-header { flex-direction: column; align-items: flex-start; gap: 0.8rem; margin-bottom: 1.2rem; }
+            .module-icon { width: 56px; height: 56px; font-size: 1.7rem; border-radius: 14px; }
+            .card { padding: 1.4rem; border-radius: 20px; margin-bottom: 1rem; }
+            .info-card { padding: 1.4rem; border-radius: 18px; }
+            .info-card p { font-size: 1rem !important; line-height: 1.6 !important; }
+            .case-card { padding: 1.4rem; border-radius: 18px; }
+            .case-card h3 { font-size: 1.1rem; }
+            .case-card p { font-size: 0.95rem; line-height: 1.65; }
+            .info-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .messages-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .message-card { padding: 1.4rem; }
+            .message-card p { font-size: 1rem; }
+            .callout { padding: 1.4rem; border-radius: 18px; margin-bottom: 1rem; }
+            .pie-chart { width: 240px; height: 240px; }
+            .pie-chart-center .value { font-size: 2.2rem; }
+            .pie-chart-legend { gap: 0.6rem; margin-top: 1.2rem; }
+            .legend-item { padding: 0.4rem 0.8rem; font-size: 0.9rem; }
+            .inr-chart { padding: 1.4rem; border-radius: 18px; }
             .inr-zones { flex-direction: column; height: auto; }
-            .inr-zone { padding: 2rem; }
-            .inr-zone:hover { flex: 1; }
+            .inr-zone { padding: 1.6rem; min-height: 70px; font-size: 1rem; }
+            .inr-zone:hover { flex: 1; transform: none; }
+            .steps-container { padding-left: 3rem; }
+            .steps-container::before { left: 1.4rem; top: 2rem; bottom: 2rem; width: 3px; }
+            .step-number { left: -3rem; width: 2.8rem; height: 2.8rem; font-size: 1rem; }
+            .step-content { padding: 1.2rem; border-radius: 16px; }
+            .step-content h3 { font-size: 1.05rem; }
+            .step-content p { font-size: 0.95rem; line-height: 1.6; }
+            .step-content:hover { transform: none; }
+            .conseil-box { padding: 1.2rem; border-radius: 16px; margin-top: 1.2rem; }
+            .conseil-box h4 { font-size: 1.05rem; }
+            .conseil-box p { font-size: 0.95rem; }
+            .summary-points { margin: 1.5rem auto; }
+            .summary-point { padding: 1.4rem; padding-right: 2.5rem; font-size: 1rem; }
+            .summary-point::after { font-size: 2rem; right: 14px; }
+            .bullets li { padding: 0.7rem 0; padding-left: 2.2rem; font-size: 1rem; line-height: 1.6; }
+            .bullets li::before { font-size: 1.2rem; }
+            .table-container { padding: 1rem; border-radius: 16px; }
+            th { padding: 0.8rem 0.6rem; font-size: 0.85rem; }
+            td { padding: 0.8rem 0.6rem; font-size: 0.85rem; word-break: break-word; }
+            .footer { height: 64px; padding: 0 1rem; }
+            .footer-left { font-size: 0.78rem; max-width: 35%; line-height: 1.2; }
+            .footer-center { font-size: 0.95rem; }
+            .nav-buttons { gap: 0.6rem; }
+            .nav-btn { width: 44px; height: 44px; }
+            .nav-btn:hover:not(:disabled) { transform: scale(1.05); }
+            .nav-btn svg { width: 18px; height: 18px; }
+            .watermark { font-size: 0.65rem; right: 0.8rem; top: 0.6rem; }
+            .case-card:hover, .info-card:hover, .summary-point:hover, .callout:hover { transform: none; }
+        }
+
+        @media (max-width: 479px) {
+            .slide-content { padding: 1rem 0.7rem; }
+            h1 { font-size: 1.85rem; }
+            h2 { font-size: 1.35rem; }
+            .subtitle { font-size: 1rem; }
+            .icon-container { width: 72px; height: 72px; margin-bottom: 1.1rem; border-radius: 18px; }
+            .icon-container svg { width: 38px; height: 38px; }
+            .footer-left { display: none; }
+            .footer { padding: 0 0.8rem; min-height: 60px; }
+            .nav-btn { width: 44px; height: 44px; }
+            .nav-btn svg { width: 18px; height: 18px; }
+            .pie-chart { width: 200px; height: 200px; }
+            .pie-chart-center .value { font-size: 1.8rem; }
+            .case-card p { font-size: 0.9rem; }
+            .step-number { left: -2.4rem; width: 2.2rem; height: 2.2rem; font-size: 0.85rem; }
+            .steps-container { padding-left: 2.4rem; }
+            .steps-container::before { left: 1.1rem; }
+            .bullets li { padding-left: 1.8rem; font-size: 0.95rem; }
+        }
+
+        /* Force callouts-visual grid to 1 column on small screens (override inline auto-fit grid) */
+        @media (max-width: 767px) {
+            .slide-content > div[style*="auto-fit"][style*="minmax"] {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
+            }
+        }
+
+        /* Landscape mobile / very short height — keep nav visible, content scrolls */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .footer { min-height: 56px; }
+            .nav-btn { width: 40px; height: 40px; }
+            .nav-btn svg { width: 16px; height: 16px; }
+            .icon-container { width: 60px; height: 60px; margin-bottom: 0.8rem; border-radius: 16px; }
+            .icon-container svg { width: 32px; height: 32px; }
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.4rem; margin-bottom: 0.8rem; }
+            .subtitle { font-size: 0.95rem; }
+            .slide-content { padding: 0.8rem 1rem; }
+        }
+
+        /* Reduce motion for users who prefer it (a11y) */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            .icon-container,
+            .icon-container::before,
+            .nav-btn,
+            .step-number,
+            .module-icon,
+            .conseil-box::before,
+            .bullets li::before,
+            .progress-fill::after,
+            .particle,
+            .wave {
+                animation: none !important;
+            }
+        }
+
+        /* Better word-wrapping for table cells (avoid ugly mid-word breaks) */
+        @media (max-width: 767px) {
+            td, th {
+                word-break: normal;
+                overflow-wrap: break-word;
+                hyphens: auto;
+            }
+            /* Short codes in first column (TAC/ASI/ASS) shouldn't break */
+            td:first-child {
+                white-space: nowrap;
+            }
+        }
+
+        /* Ensure title-slide doesn't overflow on short heights — let content shrink */
+        .title-slide {
+            min-height: 100%;
         }
 
         /* Hide elements */
@@ -1101,6 +1272,47 @@
                     tip: 'Paramétrer des alertes DP/logiciel sur délivrances AVK et INR hors cible rapportés par le patient.'
                 },
                 {
+                    id: 'reperer-3v',
+                    type: 'callouts-visual',
+                    title: 'Repérer un patient AVK au comptoir — les 3V',
+                    callouts: [
+                        {
+                            level: 'danger',
+                            title: '🗣️ Verbe — ce que dit le patient',
+                            items: [
+                                '🗣️ « Mon dentiste veut me faire une extraction… »',
+                                '🗣️ « Quelque chose pour mon mal de tête / mes courbatures » → STOP AINS/aspirine',
+                                '🗣️ « Je pars en voyage » → contrôle INR + double quantité',
+                                '🗣️ « Je saigne souvent du nez ces jours-ci »',
+                                '🗣️ « Je prends du millepertuis pour mon moral » → CI absolue',
+                                '🗣️ « Je me sens fatigué(e), un peu pâle »'
+                            ]
+                        },
+                        {
+                            level: 'warn',
+                            title: '👁️ Vue — ce qu\'on observe',
+                            items: [
+                                '👁️ Ecchymoses inhabituelles, multiples, sans traumatisme',
+                                '👁️ Pâleur, sueurs, essoufflement à l\'effort',
+                                '👁️ Saignement gingival visible',
+                                '👁️ Plaie qui suinte (compression > 10 min inefficace)',
+                                '👁️ Œdème unilatéral du mollet (suspicion phlébite)'
+                            ]
+                        },
+                        {
+                            level: 'info',
+                            title: '📋 Visite DP — ce que les données montrent',
+                            items: [
+                                '📋 Délivrances AVK régulières SANS achat de réactifs INR',
+                                '📋 ATB récent (cotrimoxazole, métronidazole, fluconazole, érythromycine, ciprofloxacine) → INR à 3-4 j',
+                                '📋 AINS / aspirine sur ordonnance → alerter prescripteur',
+                                '📋 Amiodarone, statine modifiée → surveillance renforcée',
+                                '📋 OTC répétés : vit K, CoQ10, millepertuis, ginkgo → intercepter'
+                            ]
+                        }
+                    ]
+                },
+                {
                     id: 'inr-zones',
                     type: 'inr',
                     title: 'Zones INR — Comprendre les risques',
@@ -1109,7 +1321,7 @@
                         { name: 'INR 2-3', label: 'Zone thérapeutique cible', color: 'zone-target' },
                         { name: 'INR > 3', label: 'Zone à risque hémorragique', color: 'zone-high' }
                     ],
-                    additionalInfo: '• Certaines situations : INR cible 3-4,5\n• INR > 4,5 = risque hémorragique ++\n• Contrôle régulier (même labo)\n• Fréquent au début → espacé si stable\n• Minimum 1×/mois\n• Contrôles supplémentaires si changement'
+                    additionalInfo: '• Cible standard : INR 2-3 (FA, MTEV, majorité des cas)\n• Cibles plus élevées selon prothèse mécanique (ESC 2021) : 2,5 (aortique faible thrombogénicité) / 3,0 (mitrale ou tricuspide) / 3,5 (haute thrombogénicité + facteurs de risque) ; certaines indications visent 3-4,5\n• INR > 4,5 = risque hémorragique majeur\n• Contrôle régulier (même labo si possible) ; minimum 1×/mois si stable\n• Contrôles supplémentaires à 3-4 j si nouveau médicament, arrêt, maladie intercurrente, voyage'
                 },
                 {
                     id: 'inr-messages',
@@ -1169,6 +1381,17 @@
                         { title: 'Entretien 3 — 2e module + bilan', text: 'Consolider les messages, plan écrit (signes d\'alerte, conduite, dates de contrôle), coordination MT.' }
                     ],
                     note: 'Années suivantes : 2 entretiens de suivi (ASS) centrés sur INR, événements, chirurgies prévues.'
+                },
+                {
+                    id: 'questions-soev',
+                    type: 'cards',
+                    title: '4 questions clés pour ouvrir l\'entretien — SOEV',
+                    cards: [
+                        '<strong>🩸 Surveillance INR</strong><br>Ouverture : <em>« Connaissez-vous votre zone cible d\'INR ? Quand avez-vous fait votre dernier contrôle ? »</em><br>Relance : <em>« Pouvez-vous me montrer votre carnet de suivi ? »</em><br>Objectif : vérifier que le patient connaît sa cible et la fréquence des contrôles.',
+                        '<strong>⏰ Observance & prise</strong><br>Ouverture : <em>« À quelle heure prenez-vous votre traitement ? Vous arrive-t-il de l\'oublier ? »</em><br>Relance Girerd : <em>« Avez-vous parfois l\'impression de l\'oublier ? D\'arriver en panne ? D\'arrêter parce que ça vous fait du mal ? »</em><br>Objectif : repérer les défauts d\'observance + rappeler la conduite en cas d\'oubli (rattrapage ≤ 8 h, sinon saut — ANSM).',
+                        '<strong>🚨 Effets du traitement</strong><br>Ouverture : <em>« Avez-vous eu des saignements inhabituels récemment ? Bleus, gencives, urines, selles ? »</em><br>Relance : <em>« Une fatigue inhabituelle ? Un essoufflement ? Une jambe gonflée ou douloureuse ? »</em><br>Objectif : détecter sur/sous-dosage + repérer urgences thrombotiques (15/SAMU si AVC, EP, phlébite).',
+                        '<strong>🥗 Vie quotidienne & alimentation</strong><br>Ouverture : <em>« Avez-vous changé vos habitudes alimentaires récemment ? Pris d\'autres médicaments, plantes, compléments ? »</em><br>Relance : <em>« Voyage prévu ? Sport pratiqué ? Activité manuelle ? »</em><br>Objectif : identifier interactions, automédication, situations à risque.'
+                    ]
                 },
                 {
                     id: 'aliments-vitk',
@@ -1231,8 +1454,22 @@
                     callouts: [
                         { level: 'danger', title: 'INR haut', text: 'Suspendre l\'AVK ; avis médical ; vitamine K possible selon protocole médical ; surveiller signes hémorragiques.' },
                         { level: 'warn', title: 'INR bas', text: 'Ne pas doubler seul ; avis médical pour ajustement ; vérifier prises/interaction récente.' },
-                        { level: 'info', title: 'Avant chirurgie/acte invasif', text: 'Anticiper : arrêt AVK selon protocole et relais HBPM si indiqué ; le pharmacien s\'assure du plan.' }
+                        { level: 'info', title: 'Avant chirurgie/acte invasif', text: 'Arrêt AVK 4-5 jours avant le geste. Le relais par héparine (HBPM/HNF) à dose curative N\'EST PAS systématique — il est réservé aux patients à HAUT risque thromboembolique : valve mécanique, FA avec antécédent d\'AVC/embolie, MTEV < 3 mois (HAS 2008, GIHP, BRIDGE 2015). Pour les autres : arrêt simple sans relais. Reprise AVK 12-24 h après le geste si hémostase satisfaisante.' }
                     ]
+                },
+                {
+                    id: 'special-previscan',
+                    type: 'module',
+                    icon: '⚠️',
+                    title: 'Spécial Préviscan® (fluindione) — surveillance renforcée 6 mois',
+                    points: [
+                        '<strong>📅 Restriction ANSM 1er décembre 2018 :</strong> la fluindione (Préviscan®) ne peut plus être instaurée en 1ère intention. Prescription réservée au renouvellement chez les patients déjà équilibrés.',
+                        '<strong>❌ Nouvelle instauration :</strong> utiliser warfarine (Coumadine®) ou acénocoumarol (Sintrom®). Au comptoir : si 1ère délivrance Préviscan, vérifier l\'historique, alerter le prescripteur si doute.',
+                        '<strong>⏱️ Période critique 6 premiers mois :</strong> risque de réactions immuno-allergiques — atteintes possibles rénales (néphropathie tubulo-interstitielle), cutanées (DRESS), hépatiques, état général.',
+                        '<strong>🌡️ Signes d\'alerte à expliquer au patient :</strong> fièvre > 38°C inexpliquée, éruption / urticaire / œdème visage-cou, baisse importante du volume des urines, fatigue inhabituelle, gêne respiratoire, frissons.',
+                        '<strong>📞 Conduite à tenir :</strong> contacter le médecin IMMÉDIATEMENT en cas de signes inhabituels. NE PAS arrêter le traitement sans avis médical (risque de thrombose).'
+                    ],
+                    conseil: 'À la 1ère délivrance Préviscan : 30 secondes pour dire au patient « Pendant les 6 premiers mois, soyez vigilant à toute fièvre, éruption ou baisse des urines — appelez votre médecin sans tarder, mais ne stoppez pas le traitement. » Mnémonique : FRÉ-CU-RÉ-FA (Fièvre / Cutané / Rénal / Fatigue).'
                 },
                 {
                     id: 'vie-quotidienne',
@@ -1259,8 +1496,39 @@
                         },
                         {
                             title: 'Chirurgie mal anticipée',
-                            story: 'Mme D., SAPL : pensait arrêter la veille. Vérification officine → arrêt 5 j + relais HBPM planifié avec MT/CH ; opération sans incident.'
+                            story: 'Mr D., FA stable sous Coumadine, doit subir une extraction dentaire dans 3 jours et n\'a pas prévenu son dentiste. Réflexes officinaux : (1) Demander au patient de prévenir son dentiste avant le RDV ; (2) Vérifier le carnet — INR récent dans la cible ? ; (3) Pour une avulsion simple, l\'arrêt AVK n\'est pas systématiquement nécessaire (recommandations SFCO) — coordonner avec le dentiste via MSS ; (4) Si geste plus invasif programmé + haut risque thrombotique → relais hépariné prescrit en concertation médecin/cardiologue/anesthésiste.'
                         }
+                    ]
+                },
+                {
+                    id: 'mises-en-situation',
+                    type: 'cases',
+                    title: 'Mises en situation comptoir — détecter le manquement, proposer l\'entretien',
+                    cases: [
+                        {
+                            title: 'Cas A — Patient qui demande du Doliprane après une chute',
+                            story: '<em>👤 Mr R., 70 ans, Coumadine pour FA depuis 18 mois. Vient acheter du Doliprane après s\'être cogné dans une porte la veille.</em><br><br><strong>Patient :</strong> <em>« Je voudrais du Doliprane, je me suis cogné hier, ça me lance un peu. »</em><br><strong>Préparateur :</strong> <em>« Bien sûr. Vous avez vu un bleu apparaître ? Quelque chose d\'inhabituel ? »</em><br><strong>Patient :</strong> <em>« Oui, un bleu plus gros que d\'habitude, ça m\'a surpris. »</em><br><strong>Préparateur :</strong> <em>« Je vois. Vous savez à partir de quand un bleu ou un saignement doit vous alerter chez quelqu\'un sous Coumadine ? Et quoi faire ? »</em><br><strong>Patient :</strong> <em>« Pas trop honnêtement… »</em><br><strong>Préparateur :</strong> <em>« Écoutez, ce que je vous propose : on prend un quart d\'heure ensemble la semaine prochaine. C\'est gratuit, c\'est confidentiel. On revoit les signes qui doivent vous alerter, ce qu\'il faut faire, ce qu\'il faut éviter. Vous repartez rassuré, avec une fiche claire. Ça vous va si je vous fixe un créneau mardi à 10 h ? »</em><br><br>🎯 Thématique mobilisée : <strong>Effets du traitement</strong> (signes hémorragiques + conduite à tenir)<br>✅ Question ciblée révèle le manquement · ✅ Proposition naturelle après le « je sais pas » · ✅ Argument rassurant + créneau précis (pas un vague « quand vous voulez »)'
+                        },
+                        {
+                            title: 'Cas B — Patiente avec INR bas inhabituel sur le carnet',
+                            story: '<em>👤 Mme L., 68 ans, Préviscan depuis 5 ans, INR habituel autour de 2,5. Vient renouveler avec un INR à 1,4 noté il y a 4 jours.</em><br><br><strong>Préparateur :</strong> <em>« Madame L., votre dernier INR est à 1,4 — c\'est plus bas que d\'habitude. Quelque chose a changé dans votre quotidien ces dernières semaines ? »</em><br><strong>Patiente :</strong> <em>« J\'ai commencé un régime depuis 2 mois, beaucoup de salade, brocolis, épinards… »</em><br><strong>Préparateur :</strong> <em>« Vous saviez que certains légumes verts peuvent influencer l\'effet de votre Préviscan ? »</em><br><strong>Patiente :</strong> <em>« Non, personne ne m\'a vraiment expliqué ça… »</em><br><strong>Préparateur :</strong> <em>« Écoutez, je vous propose qu\'on prenne 30 minutes ensemble cette semaine. C\'est gratuit, c\'est confidentiel. On fait le tour de tout ce qui peut influencer votre INR : alimentation, voyages, sport, automédication. Vous repartez avec une fiche personnalisée. Et je préviens votre médecin du résultat d\'INR via la messagerie sécurisée pour qu\'il ajuste si besoin. Jeudi à 11 h, ça vous va ? »</em><br><br>🎯 Thématique mobilisée : <strong>Vie quotidienne & alimentation</strong> (vitamine K + interactions globales)<br>✅ Détection proactive via DP/carnet · ✅ Question ouverte sur changements · ✅ Pédagogie courte + proposition + coordination MSS'
+                        },
+                        {
+                            title: 'Cas C — Patient qui ne connaît pas sa cible INR',
+                            story: '<em>👤 Mr B., 75 ans, Coumadine pour FA. Renouvellement de routine, dernier INR à 2,8 il y a 6 semaines.</em><br><br><strong>Préparateur :</strong> <em>« Bonjour Mr B. Vous savez quand est votre prochain contrôle ? »</em><br><strong>Patient :</strong> <em>« Heu, bientôt je crois, je vais regarder dans le carnet. »</em><br><strong>Préparateur :</strong> <em>« Et votre cible d\'INR, vous la connaissez précisément ? »</em><br><strong>Patient :</strong> <em>« Le médecin m\'a dit quelque chose, je crois 2-3, ou peut-être 2,5… je sais plus exactement. »</em><br><strong>Préparateur :</strong> <em>« C\'est important que vous la connaissiez précisément — c\'est ce qui guide votre traitement. Écoutez, je vous propose qu\'on se pose un quart d\'heure ensemble. On regarde votre carnet, votre cible exacte, votre rythme de contrôle, et la conduite à tenir si vous oubliez une prise. C\'est gratuit. Si besoin j\'appelle votre médecin pour confirmer la cible. Vendredi à 14 h ? »</em><br><br>🎯 Thématique mobilisée : <strong>Surveillance biologique (INR)</strong><br>✅ Questions courtes révèlent le manquement · ✅ Pédagogie sur l\'enjeu (« c\'est ce qui guide votre traitement ») · ✅ Proposition concrète + coordination médecin si besoin'
+                        }
+                    ]
+                },
+                {
+                    id: 'objections-patient',
+                    type: 'callouts',
+                    title: '5 objections fréquentes au comptoir & comment y répondre',
+                    callouts: [
+                        { level: 'warn', title: '« J\'ai peur de saigner avec ce médicament… »', text: '« Le risque existe, mais il est très bien maîtrisé si on respecte 3 règles : surveillance INR régulière, pas d\'automédication, signalement de tout saignement inhabituel. Le bénéfice (éviter un AVC, une embolie) est largement supérieur. Vous avez votre carnet et votre carte AVK ? »' },
+                        { level: 'danger', title: '« Mon voisin prend la même chose, on a échangé sur les doses… »', text: '« Surtout pas. La dose est strictement personnelle, calculée selon VOTRE INR. Une dose qui convient à votre voisin peut vous mettre en danger. Ne comparez jamais. Si doute, on en parle ou vous appelez votre médecin. »' },
+                        { level: 'info', title: '« Je n\'ose plus faire de sport, j\'ai trop peur… »', text: '« Le sport est même recommandé. Marche, natation, vélo, yoga, golf, tennis — aucun problème. Évitez seulement les sports de contact (rugby, boxe) et les sports avec risque de chute (ski, équitation). Une activité régulière modérée vous fait du bien. »' },
+                        { level: 'warn', title: '« Le médecin a changé ma dose, je ne comprends pas pourquoi… »', text: '« Votre dose s\'adapte à votre INR comme la dose d\'insuline s\'adapte à la glycémie. Votre médecin ajuste pour vous garder dans votre zone cible. Notez dans le carnet et suivez les contrôles prescrits. »' },
+                        { level: 'info', title: '« L\'entretien pharmaceutique, ça sert à quoi ? J\'ai déjà mon médecin… »', text: '« L\'entretien complète le suivi médical. Votre médecin gère votre traitement, nous nous occupons des interactions et du quotidien : alimentation, voyages, automédication, oublis. C\'est gratuit, confidentiel, 30 minutes. Beaucoup y trouvent des infos qu\'ils n\'avaient jamais eues. On en programme un ? »' }
                     ]
                 },
                 {
@@ -1278,6 +1546,19 @@
                     ]
                 },
                 {
+                    id: 'proposer-entretien',
+                    type: 'steps',
+                    title: 'Proposer l\'entretien naturellement — 5 réflexes',
+                    steps: [
+                        { title: 'Le déclencheur : un manquement détecté', text: 'Ne JAMAIS proposer à froid. La proposition arrive APRÈS une question qui a révélé un trou : cible INR inconnue, signes d\'alerte mal identifiés, conduite en cas d\'oubli floue, changement alimentaire récent, automédication non signalée… Le patient vient de réaliser lui-même qu\'il y a un manque — c\'est là qu\'il devient réceptif.' },
+                        { title: 'La formulation : naturelle, sans jargon', text: '« Écoutez, on prend un quart d\'heure ensemble, calmement. » Bannir : « entretien pharmaceutique conventionnel », « ASI/ASS », « bilan partagé ». Parler comme à un proche : court, concret, humain. Le mot magique : « ensemble » — ça ancre la relation, pas le service administratif.' },
+                        { title: 'L\'argument valeur : 3 phrases qui rassurent', text: '1) « C\'est gratuit, pris en charge par la Sécu. » 2) « C\'est confidentiel, on est tranquilles dans un coin. » 3) « Vous repartez avec une fiche personnalisée et des réponses claires à vos questions. » La majorité des refus viennent de la peur de l\'inconnu — démystifier en 3 phrases.' },
+                        { title: 'Fixer un créneau précis, pas un vague « quand vous voulez »', text: '« Mardi à 10 h ? » ou « Jeudi à 14 h, ça vous va ? » — propose une date et une heure. Le patient qui dit oui à un créneau précis vient. Le patient qui dit oui à « passez quand vous voulez » oublie. Préparer 2-3 créneaux types par semaine dédiés aux entretiens AVK.' },
+                        { title: 'Gérer le « non » : ne pas insister, semer pour la prochaine fois', text: 'Si refus : « Pas de souci, je vous reproposerai la prochaine fois. » Aucune argumentation, aucune pression. À la délivrance suivante : nouveau déclencheur (un INR borderline, un nouveau médicament, une question), nouvelle proposition. Le « non » d\'aujourd\'hui devient le « oui » dans 2 mois quand le patient revient avec une vraie question.' }
+                    ],
+                    note: 'Le patient ne vient pas pour un entretien — il vient pour son traitement. Notre rôle : transformer une situation comptoir banale en moment où il se sent écouté et où il accepte qu\'on prenne 15 minutes ensemble. C\'est cette qualité d\'accueil qui fait revenir.'
+                },
+                {
                     id: 'messages',
                     type: 'messages',
                     title: 'Messages clés au comptoir',
@@ -1289,13 +1570,64 @@
                     ]
                 },
                 {
+                    id: 'checklist-comptoir',
+                    type: 'callouts-visual',
+                    title: 'Check-list comptoir AVK — votre mémo de poche (5+5)',
+                    callouts: [
+                        {
+                            level: 'info',
+                            title: '❓ 5 questions à poser',
+                            items: [
+                                '« Quand est votre dernier INR et quelle valeur ? »',
+                                '« Connaissez-vous votre zone cible ? »',
+                                '« Avez-vous votre carnet et votre carte AVK ? »',
+                                '« Avez-vous pris ou changé d\'autres médicaments / plantes / compléments ? »',
+                                '« Saignements inhabituels, bleus, fatigue ? »'
+                            ]
+                        },
+                        {
+                            level: 'info',
+                            title: '✅ 5 vérifications réflexes',
+                            items: [
+                                'Pas d\'AINS, aspirine, miconazole, millepertuis dans DP/commande',
+                                'Pas d\'antibiotique récent sans contrôle INR programmé',
+                                'INR dans la cible sur le dernier carnet (sinon : MSS au médecin)',
+                                'Carnet à jour (prises notées, INR notés)',
+                                'Prochain RDV entretien programmé ou proposé'
+                            ]
+                        },
+                        {
+                            level: 'danger',
+                            title: '🚨 Mémo rouge — appel 15',
+                            items: [
+                                'Essoufflement brutal + douleur thoracique → embolie pulmonaire',
+                                'Bouche déformée + faiblesse hémicorporelle → AVC',
+                                'Jambe gonflée + douleur unilatérale → phlébite',
+                                'Vomissements sang ou « marc de café », selles noires → hémorragie digestive',
+                                'Coupure ne stoppant pas après 10 min compression → urgences'
+                            ]
+                        },
+                        {
+                            level: 'warn',
+                            title: '❌ Interactions à intercepter',
+                            items: [
+                                'Aspirine (toutes formes, même faible dose)',
+                                'Miconazole voie générale ou Daktarin gel buccal',
+                                'Millepertuis (plantes, compléments)',
+                                'AINS sur ordonnance → alerter prescripteur',
+                                'ATB (cotrimoxazole, métronidazole, fluconazole, érythromycine, ciprofloxacine) → INR à 3-4 j'
+                            ]
+                        }
+                    ]
+                },
+                {
                     id: 'synthese',
                     type: 'summary',
                     title: 'À retenir',
                     points: [
                         'INR expliqué et suivi = coeur de l\'accompagnement',
                         'Deux modules phares : alimentation/Interactions + Observance/Carnet',
-                        'Anticiper les actes invasifs (relais HBPM) ; coordonner avec MT',
+                        'Anticiper les actes invasifs ; coordonner avec MT (relais héparine non systématique, réservé haut risque thrombotique)',
                         'Facturer correctement TAC/ASI/ASS ; tracer systématiquement'
                     ]
                 },
