@@ -2255,9 +2255,9 @@
                         content.innerHTML = `
                             <h2>${slide.title}</h2>
                             <div class="avk-mechanism-grid">
-                                <div class="avk-mechanism-svg">
+                                <div class="avk-mechanism-svg" style="display: flex; flex-direction: column;">
                                     <h3 style="margin-bottom: 1rem; color: #2d3436; font-size: 1.2rem;">🧬 Animation moléculaire</h3>
-                                    <svg viewBox="0 0 360 340" style="width: 100%; max-width: 380px;">
+                                    <svg viewBox="0 0 360 340" preserveAspectRatio="xMidYMid meet" style="width: 100%; flex: 1; min-height: 320px;">
                                         <defs>
                                             <linearGradient id="hepatGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                                                 <stop offset="0%" stop-color="#feca57" stop-opacity="0.4"/>
@@ -2367,9 +2367,9 @@
                         content.innerHTML = `
                             <h2>${slide.title}</h2>
                             <div class="avk-mechanism-grid">
-                                <div class="avk-mechanism-svg">
-                                    <h3 style="margin-bottom: 0.8rem; color: #2d3436; font-size: 1.1rem;">🩸 Cascade de coagulation</h3>
-                                    <svg viewBox="0 0 360 420" style="width: 100%; max-width: 380px;">
+                                <div class="avk-mechanism-svg" style="display: flex; flex-direction: column;">
+                                    <h3 style="margin-bottom: 0.8rem; color: #2d3436; font-size: 1.1rem;">🩸 Cascade animée — cycle 10s</h3>
+                                    <svg viewBox="0 0 360 460" preserveAspectRatio="xMidYMid meet" style="width: 100%; flex: 1; min-height: 360px;">
                                         <defs>
                                             <radialGradient id="factorBlue">
                                                 <stop offset="0%" stop-color="#74b9ff"/>
@@ -2383,49 +2383,131 @@
                                                 <stop offset="0%" stop-color="#fab1a0"/>
                                                 <stop offset="100%" stop-color="#d63031"/>
                                             </radialGradient>
+                                            <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                                                <path d="M0,0 L10,5 L0,10 Z" fill="#0984e3"/>
+                                            </marker>
+                                            <marker id="arrowOrange" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                                                <path d="M0,0 L10,5 L0,10 Z" fill="#e17055"/>
+                                            </marker>
                                         </defs>
-                                        <!-- Voie intrinsèque (gauche) -->
-                                        <text x="80" y="20" text-anchor="middle" fill="#0984e3" font-size="10" font-weight="700">VOIE INTRINSÈQUE</text>
-                                        <text x="80" y="36" text-anchor="middle" fill="#5f6368" font-size="9">contact / lésion vasc.</text>
-                                        <circle cx="80" cy="60" r="14" fill="url(#factorBlue)"/>
-                                        <text x="80" y="64" text-anchor="middle" fill="white" font-size="10" font-weight="800">XII</text>
-                                        <line x1="80" y1="74" x2="80" y2="91" stroke="#0984e3" stroke-width="2" marker-end="url(#arrow)"/>
-                                        <circle cx="80" cy="105" r="14" fill="url(#factorBlue)"/>
-                                        <text x="80" y="109" text-anchor="middle" fill="white" font-size="10" font-weight="800">XI</text>
-                                        <line x1="80" y1="119" x2="80" y2="136" stroke="#0984e3" stroke-width="2"/>
-                                        <circle cx="80" cy="150" r="14" fill="url(#factorVitK)" filter="drop-shadow(0 0 5px #e17055)"/>
-                                        <text x="80" y="154" text-anchor="middle" fill="white" font-size="10" font-weight="800">IX</text>
-                                        <text x="40" y="155" fill="#d63031" font-size="9" font-weight="700">⛔AVK</text>
-                                        <!-- Voie extrinsèque (droite) -->
-                                        <text x="280" y="20" text-anchor="middle" fill="#0984e3" font-size="10" font-weight="700">VOIE EXTRINSÈQUE</text>
-                                        <text x="280" y="36" text-anchor="middle" fill="#5f6368" font-size="9">facteur tissulaire</text>
-                                        <rect x="262" y="55" width="36" height="20" rx="4" fill="#fdcb6e"/>
-                                        <text x="280" y="69" text-anchor="middle" fill="#2d3436" font-size="9" font-weight="700">FT</text>
-                                        <line x1="280" y1="80" x2="280" y2="136" stroke="#0984e3" stroke-width="2"/>
-                                        <circle cx="280" cy="150" r="14" fill="url(#factorVitK)" filter="drop-shadow(0 0 5px #e17055)"/>
-                                        <text x="280" y="154" text-anchor="middle" fill="white" font-size="10" font-weight="800">VII</text>
-                                        <text x="305" y="155" fill="#d63031" font-size="9" font-weight="700">⛔AVK</text>
-                                        <!-- Convergence vers facteur X -->
-                                        <line x1="80" y1="164" x2="170" y2="200" stroke="#0984e3" stroke-width="2"/>
-                                        <line x1="280" y1="164" x2="190" y2="200" stroke="#0984e3" stroke-width="2"/>
-                                        <text x="180" y="195" text-anchor="middle" fill="#0984e3" font-size="10" font-weight="700">VOIE COMMUNE</text>
-                                        <circle cx="180" cy="225" r="20" fill="url(#factorVitK)" filter="drop-shadow(0 0 8px #e17055)"/>
-                                        <text x="180" y="230" text-anchor="middle" fill="white" font-size="13" font-weight="900">X</text>
-                                        <text x="220" y="230" fill="#d63031" font-size="10" font-weight="700">⛔AVK · AOD · héparine</text>
-                                        <line x1="180" y1="245" x2="180" y2="270" stroke="#0984e3" stroke-width="2"/>
-                                        <circle cx="180" cy="290" r="20" fill="url(#factorVitK)" filter="drop-shadow(0 0 8px #e17055)"/>
-                                        <text x="180" y="295" text-anchor="middle" fill="white" font-size="13" font-weight="900">II</text>
-                                        <text x="220" y="295" fill="#d63031" font-size="10" font-weight="700">⛔AVK · dabigatran · héparine</text>
-                                        <text x="100" y="295" text-anchor="end" fill="#5f6368" font-size="9">prothrombine</text>
-                                        <line x1="180" y1="310" x2="180" y2="345" stroke="#0984e3" stroke-width="3"/>
-                                        <text x="195" y="330" fill="#0984e3" font-size="9" font-style="italic">→ thrombine</text>
-                                        <!-- Fibrine -->
-                                        <ellipse cx="180" cy="370" rx="60" ry="18" fill="url(#fibrine)" filter="drop-shadow(0 0 8px #d63031)">
-                                            <animate attributeName="rx" values="60;65;60" dur="2s" repeatCount="indefinite"/>
-                                        </ellipse>
-                                        <text x="180" y="375" text-anchor="middle" fill="white" font-size="12" font-weight="800">CAILLOT (fibrine)</text>
-                                        <text x="180" y="405" text-anchor="middle" fill="#5f6368" font-size="9" font-style="italic">Tous les anticoagulants visent à empêcher cette étape finale</text>
+
+                                        <!-- VOIE INTRINSÈQUE (gauche) -->
+                                        <text x="80" y="20" text-anchor="middle" fill="#0984e3" font-size="11" font-weight="800">VOIE INTRINSÈQUE</text>
+                                        <text x="80" y="34" text-anchor="middle" fill="#5f6368" font-size="9">contact / lésion vasc.</text>
+
+                                        <g><!-- F.XII -->
+                                            <circle cx="80" cy="58" r="15" fill="url(#factorBlue)" filter="drop-shadow(0 0 4px #0984e3)">
+                                                <animate attributeName="r" values="14;16;14" dur="3s" repeatCount="indefinite"/>
+                                                <animate attributeName="opacity" values="0;1" keyTimes="0;0.05" dur="10s" repeatCount="indefinite"/>
+                                            </circle>
+                                            <text x="80" y="62" text-anchor="middle" fill="white" font-size="11" font-weight="800">XII</text>
+                                        </g>
+                                        <line x1="80" y1="75" x2="80" y2="93" stroke="#0984e3" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrowBlue)">
+                                            <animate attributeName="stroke-dashoffset" from="0" to="14" dur="1.5s" repeatCount="indefinite"/>
+                                        </line>
+
+                                        <g><!-- F.XI -->
+                                            <circle cx="80" cy="108" r="15" fill="url(#factorBlue)" filter="drop-shadow(0 0 4px #0984e3)">
+                                                <animate attributeName="opacity" values="0;0;1" keyTimes="0;0.1;0.15" dur="10s" repeatCount="indefinite"/>
+                                            </circle>
+                                            <text x="80" y="112" text-anchor="middle" fill="white" font-size="11" font-weight="800">XI</text>
+                                        </g>
+                                        <line x1="80" y1="125" x2="80" y2="143" stroke="#0984e3" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrowBlue)">
+                                            <animate attributeName="stroke-dashoffset" from="0" to="14" dur="1.5s" repeatCount="indefinite"/>
+                                        </line>
+
+                                        <g><!-- F.IX (vit K dépendant) -->
+                                            <circle cx="80" cy="158" r="17" fill="url(#factorVitK)" filter="drop-shadow(0 0 6px #e17055)">
+                                                <animate attributeName="r" values="15;19;15" dur="2.5s" repeatCount="indefinite"/>
+                                                <animate attributeName="opacity" values="0;0;1" keyTimes="0;0.2;0.25" dur="10s" repeatCount="indefinite"/>
+                                            </circle>
+                                            <text x="80" y="162" text-anchor="middle" fill="white" font-size="11" font-weight="800">IX</text>
+                                            <text x="32" y="162" fill="#d63031" font-size="10" font-weight="700">⛔ AVK</text>
+                                        </g>
+
+                                        <!-- VOIE EXTRINSÈQUE (droite) -->
+                                        <text x="280" y="20" text-anchor="middle" fill="#0984e3" font-size="11" font-weight="800">VOIE EXTRINSÈQUE</text>
+                                        <text x="280" y="34" text-anchor="middle" fill="#5f6368" font-size="9">facteur tissulaire</text>
+
+                                        <g><!-- FT -->
+                                            <rect x="260" y="50" width="40" height="22" rx="6" fill="#fdcb6e" stroke="#e17055" stroke-width="2">
+                                                <animate attributeName="opacity" values="0;1" keyTimes="0;0.05" dur="10s" repeatCount="indefinite"/>
+                                            </rect>
+                                            <text x="280" y="65" text-anchor="middle" fill="#2d3436" font-size="10" font-weight="800">FT</text>
+                                        </g>
+                                        <line x1="280" y1="74" x2="280" y2="143" stroke="#0984e3" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrowBlue)">
+                                            <animate attributeName="stroke-dashoffset" from="0" to="14" dur="1.5s" repeatCount="indefinite"/>
+                                        </line>
+
+                                        <g><!-- F.VII (vit K dépendant) -->
+                                            <circle cx="280" cy="158" r="17" fill="url(#factorVitK)" filter="drop-shadow(0 0 6px #e17055)">
+                                                <animate attributeName="r" values="15;19;15" dur="2.5s" repeatCount="indefinite"/>
+                                                <animate attributeName="opacity" values="0;0;1" keyTimes="0;0.2;0.25" dur="10s" repeatCount="indefinite"/>
+                                            </circle>
+                                            <text x="280" y="162" text-anchor="middle" fill="white" font-size="11" font-weight="800">VII</text>
+                                            <text x="305" y="162" fill="#d63031" font-size="10" font-weight="700">⛔ AVK</text>
+                                        </g>
+
+                                        <!-- Convergence vers F.X -->
+                                        <path d="M 95 175 Q 130 195, 165 215" stroke="#0984e3" stroke-width="2.5" fill="none" stroke-dasharray="5,3" marker-end="url(#arrowBlue)">
+                                            <animate attributeName="stroke-dashoffset" from="0" to="16" dur="1.5s" repeatCount="indefinite"/>
+                                        </path>
+                                        <path d="M 265 175 Q 230 195, 195 215" stroke="#0984e3" stroke-width="2.5" fill="none" stroke-dasharray="5,3" marker-end="url(#arrowBlue)">
+                                            <animate attributeName="stroke-dashoffset" from="0" to="16" dur="1.5s" repeatCount="indefinite"/>
+                                        </path>
+
+                                        <text x="180" y="208" text-anchor="middle" fill="#0984e3" font-size="11" font-weight="800">VOIE COMMUNE</text>
+
+                                        <g><!-- F.X -->
+                                            <circle cx="180" cy="245" r="22" fill="url(#factorVitK)" filter="drop-shadow(0 0 8px #e17055)">
+                                                <animate attributeName="r" values="20;24;20" dur="2.5s" repeatCount="indefinite"/>
+                                                <animate attributeName="opacity" values="0;0;1" keyTimes="0;0.4;0.45" dur="10s" repeatCount="indefinite"/>
+                                            </circle>
+                                            <text x="180" y="251" text-anchor="middle" fill="white" font-size="14" font-weight="900">X</text>
+                                            <text x="220" y="251" fill="#d63031" font-size="10" font-weight="700">⛔ AVK · AOD · héparine</text>
+                                        </g>
+
+                                        <line x1="180" y1="267" x2="180" y2="295" stroke="#e17055" stroke-width="3" stroke-dasharray="6,4" marker-end="url(#arrowOrange)">
+                                            <animate attributeName="stroke-dashoffset" from="0" to="20" dur="1.5s" repeatCount="indefinite"/>
+                                        </line>
+
+                                        <g><!-- F.II / Prothrombine -->
+                                            <circle cx="180" cy="318" r="22" fill="url(#factorVitK)" filter="drop-shadow(0 0 8px #e17055)">
+                                                <animate attributeName="r" values="20;24;20" dur="2.5s" repeatCount="indefinite"/>
+                                                <animate attributeName="opacity" values="0;0;1" keyTimes="0;0.5;0.55" dur="10s" repeatCount="indefinite"/>
+                                            </circle>
+                                            <text x="180" y="324" text-anchor="middle" fill="white" font-size="14" font-weight="900">II</text>
+                                            <text x="220" y="324" fill="#d63031" font-size="10" font-weight="700">⛔ AVK · dabigatran · héparine</text>
+                                            <text x="140" y="324" text-anchor="end" fill="#5f6368" font-size="9" font-style="italic">prothrombine</text>
+                                        </g>
+
+                                        <line x1="180" y1="340" x2="180" y2="368" stroke="#d63031" stroke-width="3" stroke-dasharray="6,4" marker-end="url(#arrowOrange)">
+                                            <animate attributeName="stroke-dashoffset" from="0" to="20" dur="1.5s" repeatCount="indefinite"/>
+                                        </line>
+                                        <text x="200" y="358" fill="#d63031" font-size="11" font-weight="800" font-style="italic">
+                                            <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.6;0.7;1" dur="10s" repeatCount="indefinite"/>
+                                            ↓ thrombine
+                                        </text>
+
+                                        <!-- CAILLOT (fibrine) -->
+                                        <g>
+                                            <ellipse cx="180" cy="395" rx="20" ry="8" fill="url(#fibrine)" filter="drop-shadow(0 0 8px #d63031)">
+                                                <animate attributeName="rx" values="20;75;75" keyTimes="0;0.85;1" dur="10s" repeatCount="indefinite"/>
+                                                <animate attributeName="ry" values="8;22;22" keyTimes="0;0.85;1" dur="10s" repeatCount="indefinite"/>
+                                            </ellipse>
+                                            <text x="180" y="400" text-anchor="middle" fill="white" font-size="13" font-weight="900">
+                                                <animate attributeName="opacity" values="0;0;1" keyTimes="0;0.85;0.9" dur="10s" repeatCount="indefinite"/>
+                                                CAILLOT
+                                            </text>
+                                            <text x="180" y="416" text-anchor="middle" fill="white" font-size="10" font-weight="700">
+                                                <animate attributeName="opacity" values="0;0;1" keyTimes="0;0.88;0.92" dur="10s" repeatCount="indefinite"/>
+                                                fibrine
+                                            </text>
+                                        </g>
+
+                                        <text x="180" y="448" text-anchor="middle" fill="#5f6368" font-size="9" font-style="italic">Tous les anticoagulants visent à empêcher cette étape finale</text>
                                     </svg>
+                                    <p style="text-align: center; font-size: 0.8rem; color: #5f6368; margin-top: 0.5rem; font-style: italic;">Cycle 10s : voies activées → convergence X et II → caillot final</p>
                                 </div>
                                 <div class="card" style="margin-bottom: 0; padding: 1.5rem;">
                                     <h3 style="margin-bottom: 1rem; color: #2d3436; font-size: 1.2rem;">🎯 Cibles thérapeutiques par classe</h3>
