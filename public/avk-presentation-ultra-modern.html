@@ -2560,8 +2560,8 @@
                         content.innerHTML = `
                             <h2>${slide.title}</h2>
                             <div class="avk-mechanism-grid">
-                                <div class="avk-mechanism-svg">
-                                    <svg viewBox="0 0 400 400" style="width: 100%; max-width: 400px;">
+                                <div class="avk-mechanism-svg" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                    <svg viewBox="0 0 480 480" preserveAspectRatio="xMidYMid meet" style="width: 100%; max-width: 480px; display: block; margin: 0 auto;">
                                         <defs>
                                             <radialGradient id="avkCenterGrad">
                                                 <stop offset="0%" stop-color="#ff7675"/>
@@ -2576,25 +2576,34 @@
                                         </defs>
                                         ${slide.drugs.map((d, i) => {
                                             const angle = (i * (360 / slide.drugs.length) - 90) * Math.PI / 180;
-                                            const x = 200 + 145 * Math.cos(angle);
-                                            const y = 200 + 145 * Math.sin(angle);
-                                            return `<line x1="200" y1="200" x2="${x}" y2="${y}" stroke="${d.color}" stroke-width="2" stroke-opacity="0.45" stroke-dasharray="6,4"><animate attributeName="stroke-dashoffset" from="0" to="20" dur="2s" repeatCount="indefinite"/></line>`;
+                                            const x = 240 + 175 * Math.cos(angle);
+                                            const y = 240 + 175 * Math.sin(angle);
+                                            return `<line x1="240" y1="240" x2="${x}" y2="${y}" stroke="${d.color}" stroke-width="2" stroke-opacity="0.45" stroke-dasharray="6,4"><animate attributeName="stroke-dashoffset" from="0" to="20" dur="2s" repeatCount="indefinite"/></line>`;
                                         }).join('')}
-                                        <circle cx="200" cy="200" r="58" fill="url(#avkCenterGrad)" filter="drop-shadow(0 0 18px rgba(214,48,49,0.6))">
-                                            <animate attributeName="r" values="56;60;56" dur="3s" repeatCount="indefinite"/>
+                                        <circle cx="240" cy="240" r="62" fill="url(#avkCenterGrad)" filter="drop-shadow(0 0 18px rgba(214,48,49,0.6))">
+                                            <animate attributeName="r" values="60;64;60" dur="3s" repeatCount="indefinite"/>
                                         </circle>
-                                        <text x="200" y="195" text-anchor="middle" fill="white" font-size="14" font-weight="800">AVK</text>
-                                        <text x="200" y="212" text-anchor="middle" fill="white" font-size="10">INR ↑↓ ?</text>
+                                        <text x="240" y="235" text-anchor="middle" fill="white" font-size="16" font-weight="800">AVK</text>
+                                        <text x="240" y="254" text-anchor="middle" fill="white" font-size="11">INR ↑↓ ?</text>
                                         ${slide.drugs.map((d, i) => {
                                             const angle = (i * (360 / slide.drugs.length) - 90) * Math.PI / 180;
-                                            const x = 200 + 145 * Math.cos(angle);
-                                            const y = 200 + 145 * Math.sin(angle);
+                                            const x = 240 + 175 * Math.cos(angle);
+                                            const y = 240 + 175 * Math.sin(angle);
+                                            // Split name on " / " to handle 2 lines for long names
+                                            const nameParts = d.name.split(' / ');
+                                            const isMultiline = nameParts.length > 1 || d.name.length > 11;
                                             return `
-                                                <circle cx="${x}" cy="${y}" r="38" fill="url(#drugGrad${i})" filter="drop-shadow(0 4px 10px ${d.color}88)">
-                                                    <animate attributeName="r" values="36;40;36" dur="${3 + i * 0.3}s" repeatCount="indefinite"/>
+                                                <circle cx="${x}" cy="${y}" r="48" fill="url(#drugGrad${i})" filter="drop-shadow(0 4px 10px ${d.color}88)">
+                                                    <animate attributeName="r" values="46;50;46" dur="${3 + i * 0.3}s" repeatCount="indefinite"/>
                                                 </circle>
-                                                <text x="${x}" y="${y - 2}" text-anchor="middle" fill="white" font-size="10" font-weight="700">${d.name}</text>
-                                                <text x="${x}" y="${y + 12}" text-anchor="middle" fill="white" font-size="9">${d.effect}</text>
+                                                ${isMultiline && nameParts.length > 1 ? `
+                                                    <text x="${x}" y="${y - 8}" text-anchor="middle" fill="white" font-size="10" font-weight="700">${nameParts[0]}</text>
+                                                    <text x="${x}" y="${y + 4}" text-anchor="middle" fill="white" font-size="10" font-weight="700">${nameParts[1]}</text>
+                                                    <text x="${x}" y="${y + 18}" text-anchor="middle" fill="white" font-size="9" opacity="0.95">${d.effect}</text>
+                                                ` : `
+                                                    <text x="${x}" y="${y - 2}" text-anchor="middle" fill="white" font-size="11" font-weight="700">${d.name}</text>
+                                                    <text x="${x}" y="${y + 13}" text-anchor="middle" fill="white" font-size="10" opacity="0.95">${d.effect}</text>
+                                                `}
                                             `;
                                         }).join('')}
                                     </svg>
